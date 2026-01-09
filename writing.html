@@ -9,86 +9,138 @@
 </head>
 <body>
     <nav class="nav-container" id="navMenu">
-      <button class="nav-button" onclick="toggleNav()">
-        <span class="arrow-icon">&#x21dd;</span> </button>
-      </button>
+        <button class="nav-button" onclick="toggleNav()">
+            <span class="arrow-icon">&#x21dd;</span>
+        </button>
 
-      <div class="nav-items">
-        <a href="index.html" class="item item-1"><img src="images/homeicon.jpg" alt="Home"></a>
-        <a href="projects.html" class="item item-4"><img src="images/projectsnew.jpg" alt="Projects"></a>
-        <a href="about.html" class="item item-2"><img src="images/abouticon.jpg" alt="About"></a>
-        <a href="resume.html" class="item item-3"><img src="images/resumenew.jpg" alt="Resume"></a>
-      </div>
+        <div class="nav-items">
+            <a href="index.html" class="item item-4"><img src="images/homeicon.jpg" alt="Home"></a>
+            <a href="projects.html" class="item item-1"><img src="images/projectsnew.jpg" alt="Projects"></a>
+            <a href="about.html" class="item item-3"><img src="images/abouticonc.jpg" alt="About"></a>
+            <a href="resume.html" class="item item-2"><img src="images/resumenew.jpg" alt="Resume"></a>
+        </div>
     </nav>
-    <script src="source.js"></script>
     <header class="writing-header">
-        <p>Writing</p>
+        <p style="text-align: center; margin-left: 150px;">
+            Writing <span style="font-size: 0.3em;">(and more)</span>
+        </p>
     </header>
-    <main class="writing-grid">
-      <div class="story-card" onclick="openModal('story1')">
-          <div class="card-header">
-              <span class="story-date">Dec 2025</span>
-              <h2 class="story-title">the digital silhouette</h2>
-          </div>
-          <img src="images/writing1.jpg" alt="Story Image" class="story-photo">
-          <p class="story-blurb">An exploration into AI-generated interfaces.</p>
-          
-          <template id="story1">
-              <h1>the digital silhouette</h1>
-              <img src="images/writing1.jpg" style="width:100%; margin-bottom:20px;">
-              <p>Your full long-form story text goes here...</p>
-          </template>
-      </div>
-      <div class="story-card" onclick="openModal('story1')">
-          <div class="card-header">
-              <span class="story-date">Dec 2025</span>
-              <h2 class="story-title">the digital silhouette</h2>
-          </div>
-          <img src="images/writing1.jpg" alt="Story Image" class="story-photo">
-          <p class="story-blurb">An exploration into AI-generated interfaces.</p>
-          
-          <template id="story1">
-              <h1>the digital silhouette</h1>
-              <img src="images/writing1.jpg" style="width:100%; margin-bottom:20px;">
-              <p>Your full long-form story text goes here...</p>
-          </template>
-      </div>
-      <div class="story-card" onclick="openModal('story1')">
-          <div class="card-header">
-              <span class="story-date">Dec 2025</span>
-              <h2 class="story-title">the digital silhouette</h2>
-          </div>
-          <img src="images/writing1.jpg" alt="Story Image" class="story-photo">
-          <p class="story-blurb">An exploration into AI-generated interfaces.</p>
-          
-          <template id="story1">
-              <h1>the digital silhouette</h1>
-              <img src="images/writing1.jpg" style="width:100%; margin-bottom:20px;">
-              <p>Your full long-form story text goes here...</p>
-          </template>
-      </div>
-      <div class="story-card" onclick="openModal('story1')">
-          <div class="card-header">
-              <span class="story-date">Dec 2025</span>
-              <h2 class="story-title">the digital silhouette</h2>
-          </div>
-          <img src="images/writing1.jpg" alt="Story Image" class="story-photo">
-          <p class="story-blurb">An exploration into AI-generated interfaces.</p>
-          
-          <template id="story1">
-              <h1>the digital silhouette</h1>
-              <img src="images/writing1.jpg" style="width:100%; margin-bottom:20px;">
-              <p>Your full long-form story text goes here...</p>
-          </template>
-      </div>
-  </main>
 
-  <div id="storyModal" class="modal">
-      <div class="modal-content">
-          <span class="close-button" onclick="closeModal()">&times;</span>
-          <div id="modalBody"></div>
-      </div>
-  </div>
-  <script src = "source.js"></script>
+    <!-- Filter Bar -->
+    <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all">all</button>
+        <button class="filter-btn" data-filter="writing">writing</button>
+        <button class="filter-btn" data-filter="photography">photography</button>
+        <button class="filter-btn" data-filter="videography">videography</button>
+    </div>
+
+    <!-- Content Grid -->
+    <main class="writing-grid" id="contentGrid">
+        <!-- Writing Example -->
+        <div class="story-card" data-type="writing" data-id="evolved">
+            <div class="card-header">
+                <span class="story-date">Dec 2025</span>
+                <p class="story-title">Evolved</p>
+            </div>
+            <img src="./images/writing/evolved.JPG" alt="Story Image" class="story-photo">
+            <p class="story-blurb">An exploration into AI-generated interfaces and their impact on design.</p>
+        </div>
+
+        <!-- Videography Example -->
+        <div class="story-card" data-type="videography" data-id="video1">
+            <div class="card-header">
+                <span class="story-date">Jan 2026</span>
+                <p class="story-title">Safari</p>
+            </div>
+            <img src="./images/writing/safari2.JPG" alt="Video" class="story-photo">
+            <p class="story-blurb">An experimental short film about movement in everyday life.</p>
+        </div>
+
+                <!-- Photography Example -->
+        <div class="story-card" data-type="photography" data-id="southafrica">
+            <div class="card-header">
+                <span class="story-date">Sep 2025</span>
+                <p class="story-title">South Africa</p>
+            </div>
+            <img src="./images/writing/southafrica2.JPG" alt="Photography" class="story-photo">
+            <p class="story-blurb">A collection of architectural photography from downtown Seattle.</p>
+        </div>
+
+        <!-- More Examples -->
+        <div class="story-card" data-type="writing" data-id="fancam">
+            <div class="card-header">
+                <span class="story-date">Sep 2025</span>
+                <p class="story-title">Fan Cam</p>
+            </div>
+            <img src="./images/writing/fancam2.JPEG" alt="Story Image" class="story-photo">
+            <p class="story-blurb">A short story about nostalgia and digital footprints.</p>
+        </div>
+
+        <div class="story-card" data-type="videography" data-id="video1">
+            <div class="card-header">
+                <span class="story-date">Jul 2025</span>
+                <p class="story-title">July Fourth</p>
+            </div>
+            <img src="./images/writing/july.JPG" alt="Video" class="story-photo">
+            <p class="story-blurb">An experimental short film about movement in everyday life.</p>
+        </div>
+
+        <div class="story-card" data-type="photography" data-id="summer">
+            <div class="card-header">
+                <span class="story-date">Aug 2025</span>
+                <p class="story-title">Summer</p>
+            </div>
+            <img src="./images/writing/summer.JPG" alt="Photography" class="story-photo">
+            <p class="story-blurb">A collection of architectural photography from downtown Seattle.</p>
+        </div>
+
+        <div class="story-card" data-type="writing" data-id="arrow">
+            <div class="card-header">
+                <span class="story-date">Jan 2025</span>
+                <p class="story-title">The Arrow</p>
+            </div>
+            <img src="./images/writing/arrow.JPEG" alt="Story Image" class="story-photo">
+            <p class="story-blurb">A short story about nostalgia and digital footprints.</p>
+        </div>
+
+        <div class="story-card" data-type="photography" data-id="abroad">
+            <div class="card-header">
+                <span class="story-date">Dec 2024</span>
+                <p class="story-title">Semester Abroad</p>
+            </div>
+            <img src="./images/writing/abroad2.JPG" alt="Photography" class="story-photo">
+            <p class="story-blurb">A collection of architectural photography from downtown Seattle.</p>
+        </div>
+
+        <div class="story-card" data-type="photography" data-id="madrid">
+            <div class="card-header">
+                <span class="story-date">Nov 2024</span>
+                <p class="story-title">Madrid</p>
+            </div>
+            <img src="./images/writing/madrid.JPG" alt="Photography" class="story-photo">
+            <p class="story-blurb">A collection of architectural photography from downtown Seattle.</p>
+        </div>
+
+        <div class="story-card" data-type="writing" data-id="bathroom">
+            <div class="card-header">
+                <span class="story-date">Sep 2022</span>
+                <p class="story-title">Gender Neutral Bathroom</p>
+            </div>
+            <img src="./images/writing/bathroom.HEIC" alt="Story Image" class="story-photo">
+            <p class="story-blurb">A short story about nostalgia and digital footprints.</p>
+        </div>
+
+    </main>
+
+
+
+    <!-- Modal Container -->
+    <div id="storyModal" class="modal">
+        <div class="modal-content" id="modalContent">
+            <span class="close-button" id="closeBtn">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+    <script src="source.js"></script>
 </body>
 </html>

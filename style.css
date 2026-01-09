@@ -51,13 +51,13 @@ body, html {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: left;
     /* text-align: center; */
 
 }
 
 .bio-column p {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     line-height: 1.3;
     margin-bottom: 20px;
 }
@@ -101,7 +101,7 @@ body.projects-page {
 
 .gallery-header p {
     letter-spacing: 2px;
-    font-size: 10px;
+    font-size: 18px;
     margin: 20px;
 }
 
@@ -154,14 +154,46 @@ body.projects-page {
 
 /* Hover Content */
 
-#project1 { --overlay-color: rgba(134, 206, 219, 0.5); --hover-color: rgba(134, 206, 219, 0.8);} 
-#project2 { --overlay-color: rgba(255, 100, 126, 0.5); --hover-color: rgba(255, 100, 126, 0.8);}
-#project3 { --overlay-color: rgba(113, 158, 255, 0.3); --hover-color: rgba(113, 158, 255, 0.8);}
-#project4 { --overlay-color: rgba(246, 181, 83, 0.5); --hover-color: rgba(246, 181, 83, 0.8);}
-#project5 { --overlay-color: rgba(250, 138, 158, 0.2); --hover-color: rgba(246, 114, 138, 0.8);}
-#project6 { --overlay-color: rgba(245, 199, 239, 0.5); --hover-color: rgba(245, 199, 239, 0.8);}
-#project7 { --overlay-color: rgba(155, 183, 242, 0.5); --hover-color: rgba(155, 183, 242, 0.8);}
-#project8 { --overlay-color: rgba(186, 235, 161, 0.5); --hover-color: rgba(186, 235, 161 ,0.8);}
+#project1 { 
+    --overlay-color: rgba(134, 206, 219, 0.5); 
+    --hover-color: rgba(134, 206, 219, 0.8);
+    --text-color: rgba(4, 45, 52);
+} 
+#project2 {
+    --overlay-color: rgba(255, 100, 126, 0.5);
+    --hover-color: rgba(255, 100, 126, 0.8);
+    --text-color: rgba(75, 4, 16);
+}
+#project3 { 
+    --overlay-color: rgba(71, 86, 119, 0.3); 
+    --hover-color: rgba(46, 67, 111, 0.8);
+    --text-color: rgb(107, 121, 156);   
+}
+#project4 {
+    --overlay-color: rgba(133, 115, 179, 0.3);
+    --hover-color: rgba(104, 85, 155, 0.725);
+    --text-color: rgb(28, 20, 48);
+}
+#project5 {
+    --overlay-color: rgba(250, 138, 158, 0.2);
+    --hover-color: rgba(246, 114, 138, 0.9);
+    --text-color: rgb(78, 0, 16);
+}
+#project6 {
+    --overlay-color: rgba(245, 199, 239, 0.5);
+    --hover-color: rgba(227, 179, 221, 0.877);
+    --text-color: rgb(65, 42, 62);
+}
+#project7 {
+    --overlay-color: rgba(155, 183, 242, 0.5);
+    --hover-color: rgba(155, 183, 242, 0.8);
+    --text-color: rgb(21, 43, 90);
+}
+#project8 {
+    --overlay-color: rgba(186, 235, 161, 0.5);
+    --hover-color: rgba(186, 235, 161 ,0.8);
+    --text-color: rgb(21, 48, 8);
+}
 
 .project-overlay {
   position: absolute;
@@ -175,6 +207,8 @@ body.projects-page {
   padding: 30px;
   text-align: center;
   transition: background 0.4s ease;
+  color:  var(--text-color,black); 
+  pointer-events: none; 
 }
 
 /* Hide all text/button content by default */
@@ -184,6 +218,8 @@ body.projects-page {
   opacity: 0;
   transform: translateY(10px); /* Subtle slide-up effect */
   transition: all 0.4s ease;
+  color:  var(--text-color,black); 
+  pointer-events: auto; 
 }
 
 .image-wrapper:hover .project-overlay {
@@ -214,7 +250,7 @@ body.projects-page {
 
 /* The Project Description */
 .project-overlay p {
-    font-size: 16px;         /* Standard readable size */
+    font-size: 20px;         /* Standard readable size */
     line-height: 1.4;       /* Adds breathing room between lines of text */
     max-width: 80%;         /* Keeps text from hitting the edges */
     margin-bottom: 20px;    /* Space before the 'View Details' button */
@@ -222,10 +258,12 @@ body.projects-page {
 
 .view-btn {
     text-decoration: none;
-    color: black;
-    border-bottom: 1px solid black;
-    font-size: 11px;
+    color:  var(--text-color,black); 
+    border-bottom: 1px solid var(--text-color,black);
+    font-weight: bold;
+    font-size: 16px;
     text-transform: uppercase;
+    margin-top:10px;
     opacity: 0;
 }
 
@@ -240,7 +278,7 @@ body.projects-page {
 }
 
 .nav-button {
-    background-image: url("images/projectsarrow.jpg"); /* No background */
+    background-image: url("images/projectarrow.jpg");
     background-size: contain;
     border: none;     /* No border */
     padding: 0;
@@ -250,6 +288,19 @@ body.projects-page {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+}
+
+/* Page-specific arrow icons */
+body.resume-page .nav-button {
+    background-image: url("images/resumearrow.jpg");
+}
+
+body.writing-page .nav-button {
+    background-image: url("images/writingarrow.jpg");
+}
+
+body.about-page .nav-button {
+    background-image: url("images/aboutarrow.jpg");
 }
 
 .arrow-icon {
@@ -354,13 +405,14 @@ body.resume-page {
     margin: 0;
     padding-top: 30px;
     padding-bottom: 20px;
-    border-bottom: 1px solid black;
     text-align: center;
     
 }
 
+
+
 .paper {
-    margin: 50px;
+    margin: 20px 50px 50px 50px;
     padding: 50px;
     background-color: white;
 }
@@ -400,6 +452,8 @@ body.resume-page {
     transition: grid-template-rows 0.4s ease, padding 0.4s ease;
     overflow: hidden;
     text-align: left;
+    letter-spacing: 1.5px;
+    font-size: 15px;
 }
 
 /* 4. Inside the grid, we need a wrapper to make the 0fr/1fr trick work */
@@ -493,11 +547,51 @@ body.resume-page {
 }
 
 /* Writing STYLE */
+.filter-bar {
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+    padding: 10px 10px;
+    background: transparent;
+    /* border-bottom: 1px solid black; */
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 5px 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    text-transform: lowercase;
+    font-size: 16px;
+    color: #999;
+    transition: color 0.3s ease;
+    position: relative;
+}
+
+.filter-btn:hover {
+    color: #000;
+}
+
+.filter-btn.active {
+    color: #000;
+}
+
+.filter-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #000;
+}
+
+/* Writing Grid */
 .writing-grid {
     display: grid;
-    /* This automatically creates as many columns as fit, then starts new rows */
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); 
-    gap: 50px 30px; /* 50px vertical spacing between rows, 30px horizontal */
+    gap: 50px 30px;
     padding: 40px;
     max-width: 1300px;
     margin: 0 auto;
@@ -505,16 +599,44 @@ body.resume-page {
 }
 
 .story-card {
-    border: 1px solid #000;
+    /* border: 1px solid #000; */
     padding: 20px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, opacity 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+    will-change: opacity, transform;
     display: flex;
     flex-direction: column;
 }
 
-.story-card:hover {
-    background-color: #f9f9f9;
+.content-tag {
+    display: inline-block;
+    /* padding: 2px 8px; */
+    background: transparent;
+    font-size: 10px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    /* border: 1px solid #ccc; */
+    color: #888;
+    align-self: flex-start;
+}
+
+.story-card.hidden {
+    display: none;
+}
+
+/* Hide other cards only when the photo within a card is hovered or focused */
+.writing-grid:has(.story-card .story-photo:hover) .story-card:not(:has(.story-photo:hover)),
+.writing-grid:has(.story-card .story-photo:focus) .story-card:not(:has(.story-photo:focus)) {
+    opacity: 0;
+    transition: opacity 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+    pointer-events: none;
+}
+
+/* Keep cards visually static on hover — only bring the active card forward without movement */
+.story-card:focus-within,
+.story-card:has(.story-photo:hover),
+.story-card:has(.story-photo:focus) {
+    z-index: 2;
 }
 
 .card-header {
@@ -526,14 +648,14 @@ body.resume-page {
 
 .story-date {
     font-size: 12px;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     color: #666;
 }
 
 .story-title {
     font-size: 20px;
     margin: 0;
-    text-transform: lowercase; /* Matches your aesthetic */
+    /* text-transform: lowercase; */
 }
 
 .story-photo {
@@ -550,23 +672,70 @@ body.resume-page {
     margin-bottom: 0;
 }
 
-/* Hidden Story Logic */
-.story-full-content {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.5s ease, padding 0.5s ease;
-    border-top: 0px solid black;
-    margin-top: 0;
+/* Photo Gallery Modal - Single Photo View */
+.modal-content.photo-gallery {
+    max-width: 1000px;
+    padding: 60px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.story-card.active .story-full-content {
-    max-height: 1000px; /* Adjust based on story length */
-    padding-top: 20px;
+.photo-viewer {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+}
+
+.photo-viewer img {
+    width: 100%;
+    height: auto;
+    max-height: 70vh;
+    object-fit: contain;
+    display: block;
+}
+
+.photo-caption {
+    text-align: center;
     margin-top: 20px;
-    border-top: 1px solid #000;
+    font-size: 14px;
+    color: #666;
+    font-style: italic;
 }
 
-/* Modal Background (the dark overlay) */
+.photo-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 30px;
+}
+
+.photo-nav-btn {
+    background: transparent;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #666;
+    transition: color 0.3s ease;
+}
+
+.photo-nav-btn:hover:not(:disabled) {
+    color: #000;
+}
+
+.photo-nav-btn:disabled {
+    opacity: 0;
+    cursor: not-allowed;
+}
+
+.photo-counter {
+    font-size: 14px;
+    color: #666;
+}
+
+/* Modal Styles */
 .modal {
     display: none; 
     position: fixed;
@@ -575,35 +744,133 @@ body.resume-page {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.8); /* Darken screen */
-    backdrop-filter: blur(5px); /* Modern blur effect */
+    background-color: rgba(0,0,0,0.8);
+    backdrop-filter: blur(5px);
 }
 
-/* Modal Box */
 .modal-content {
     background-color: #fff;
-    margin: 5% auto;
+    margin: 5vh auto;
     padding: 60px;
     width: 80%;
     max-width: 800px;
-    max-height: 80vh;
-    overflow-y: auto; /* Scroll story if it's long */
+    max-height: 90vh;
+    overflow-y: auto;
     position: relative;
     text-align: left;
 }
 
-/* Close Button */
+        /* Photo Gallery Modal - Single Photo View */
+        .modal-content.photo-gallery {
+            max-width: 90vw;
+            max-height: 90vh;
+            margin: 5vh auto;
+            padding: 40px 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-y: hidden;
+        }
+
+        .modal-content.video-player {
+            max-width: 95vw;
+            max-height: 95vh;
+            overflow-y: hidden;
+        }
+
+.photo-viewer {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+}
+
+.photo-viewer img {
+    width: 100%;
+    height: auto;
+    max-height: calc(90vh - 200px);
+    object-fit: contain;
+    display: block;
+}
+
+.photo-caption {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #666;
+    font-style: italic;
+}
+
+.photo-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 30px;
+}
+
+.photo-nav-btn {
+    background: transparent;
+    /* border: 1px solid #000; */
+    padding: 5px 20px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.3s ease;
+}
+
+.photo-nav-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.photo-counter {
+    font-size: 14px;
+    color: #666;
+}
+
+/* Video Modal */
+.modal-content.video-player {
+    max-width: 1000px;
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 ratio */
+    height: 0;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Writing Modal */
+.modal-content.writing-story {
+    max-width: 900px;
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+.modal-content.writing-story h1 {
+    text-transform: lowercase;
+    border-bottom: 1px solid black;
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+}
+
 .close-button {
     position: absolute;
     right: 20px;
     top: 10px;
     font-size: 40px;
     cursor: pointer;
+    z-index: 10;
 }
 
-.modal-content h1 {
-    text-transform: lowercase;
-    border-bottom: 1px solid black;
-    padding-bottom: 10px;
-    margin-bottom: 30px;
+.close-button:hover {
+    color: #666;
 }
