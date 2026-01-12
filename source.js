@@ -517,24 +517,56 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function showPhoto(index, photos, title) {
         const photo = photos[index];
-        modalBody.innerHTML = `
-            <h1>${title}</h1>
-            <div class="photo-viewer">
-                <img src="${photo.url}" alt="${photo.caption}">
-                <p class="photo-caption">${photo.caption}</p>
-            </div>
-            <div class="photo-nav">
-                <button class="photo-nav-btn" id="prevBtn" ${index === 0 ? 'disabled' : ''}>← Previous</button>
-                <span class="photo-counter">${index + 1} / ${photos.length}</span>
-                <button class="photo-nav-btn" id="nextBtn" ${index === photos.length - 1 ? 'disabled' : ''}>Next →</button>
-            </div>
-        `;
-
-        document.getElementById('prevBtn')?.addEventListener('click', () => {
+        
+        // Reuse or create elements without destroying DOM
+        let photoViewer = modalBody.querySelector('.photo-viewer');
+        let photoNav = modalBody.querySelector('.photo-nav');
+        
+        if (!photoViewer) {
+            // First time: create structure once
+            modalBody.innerHTML = `
+                <h1>${title}</h1>
+                <div class="photo-viewer">
+                    <img src="${photo.url}" alt="${photo.caption}">
+                    <p class="photo-caption">${photo.caption}</p>
+                </div>
+                <div class="photo-nav">
+                    <button class="photo-nav-btn" id="prevBtn">← Previous</button>
+                    <span class="photo-counter"></span>
+                    <button class="photo-nav-btn" id="nextBtn">Next →</button>
+                </div>
+            `;
+            photoViewer = modalBody.querySelector('.photo-viewer');
+            photoNav = modalBody.querySelector('.photo-nav');
+        }
+        
+        // Update image and caption without recreating
+        const img = photoViewer.querySelector('img');
+        const caption = photoViewer.querySelector('.photo-caption');
+        const counter = photoNav.querySelector('.photo-counter');
+        const prevBtn = photoNav.querySelector('#prevBtn');
+        const nextBtn = photoNav.querySelector('#nextBtn');
+        
+        img.src = photo.url;
+        img.alt = photo.caption;
+        caption.textContent = photo.caption;
+        counter.textContent = `${index + 1} / ${photos.length}`;
+        
+        prevBtn.disabled = index === 0;
+        nextBtn.disabled = index === photos.length - 1;
+        
+        // Remove old listeners and attach new ones
+        prevBtn.replaceWith(prevBtn.cloneNode(true));
+        nextBtn.replaceWith(nextBtn.cloneNode(true));
+        
+        const newPrevBtn = photoNav.querySelector('#prevBtn');
+        const newNextBtn = photoNav.querySelector('#nextBtn');
+        
+        newPrevBtn.addEventListener('click', () => {
             if (index > 0) showPhoto(index - 1, photos, title);
         });
 
-        document.getElementById('nextBtn')?.addEventListener('click', () => {
+        newNextBtn.addEventListener('click', () => {
             if (index < photos.length - 1) showPhoto(index + 1, photos, title);
         });
     }
@@ -556,6 +588,13 @@ document.addEventListener('DOMContentLoaded', () => {
             } else if (content.type === 'photography') {
                 modalContent.classList.add('photo-gallery');
                 currentPhotoIndex = 0;
+                
+                // Preload all photos to avoid black flash
+                content.photos.forEach(photo => {
+                    const img = new Image();
+                    img.src = photo.url;
+                });
+                
                 showPhoto(0, content.photos, content.title);
             } else if (content.type === 'videography') {
                 modalContent.classList.add('video-player');
@@ -573,51 +612,42 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             modal.style.display = 'block';
+            // Trigger animation by adding show class after display is set
+            setTimeout(() => modal.classList.add('show'), 10);
             document.body.style.overflow = 'hidden';
         });
     });
 
     closeBtn.addEventListener('click', () => {
-        modal.style.display = 'none';
-        document.body.style.overflow = 'auto';
+        modal.classList.remove('show');
+        setTimeout(() => {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }, 300);
     });
 
     window.addEventListener('click', (e) => {
         if (e.target === modal) {
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto';
+            modal.classList.remove('show');
+            setTimeout(() => {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }, 300);
         }
     });
 });
 
-// Pause GIFs on hover: swap to the still image and back
-function setupGifPause() {
-    const gifImgs = document.querySelectorAll('img[data-still]');
-    
-    // Preload all still images first
-    gifImgs.forEach(img => {
-        const stillSrc = img.dataset.still;
-        const preload = new Image();
-        preload.src = stillSrc;
+
+document.querySelectorAll('.image-wrapper').forEach(wrapper => {
+    const img = wrapper.querySelector('img');
+    const gifSrc = img.getAttribute('data-gif');
+    const stillSrc = img.getAttribute('data-still');
+
+    wrapper.addEventListener('mouseenter', () => {
+        if (stillSrc) img.src = stillSrc;
     });
 
-    // After a brief delay to ensure preload started, attach listeners
-    setTimeout(() => {
-        gifImgs.forEach(img => {
-            const still = img.dataset.still;
-            const anim = img.src;
-
-            img.addEventListener('mouseenter', () => { img.src = still; }, false);
-            img.addEventListener('mouseleave', () => { img.src = anim; }, false);
-            img.addEventListener('focus', () => { img.src = still; }, false);
-            img.addEventListener('blur', () => { img.src = anim; }, false);
-        });
-    }, 50);
-}
-
-// Run setup after DOM is loaded
-if (document.readyState !== 'loading') {
-    setupGifPause();
-} else {
-    document.addEventListener('DOMContentLoaded', setupGifPause);
-}
+    wrapper.addEventListener('mouseleave', () => {
+        if (gifSrc) img.src = gifSrc;
+    });
+});
