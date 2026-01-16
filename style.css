@@ -67,6 +67,11 @@ body, html {
     .portfolio-grid {
         grid-template-columns: 1fr;
         height: auto;
+        display: flex;
+        flex-direction: column;
+    }
+    .bio-column {
+        order: -1;
     }
     .side-column {
         height: auto;
@@ -431,9 +436,18 @@ body.resume-page {
     display: flex;
     align-items: flex-start;
     border-top: 1px solid #000;
+    position: relative; /* <-- required so z-index works */
+    z-index: 0;
 }
 
 /* 2. Trigger stays fixed width */
+.accordion-group {
+    display: flex;
+    align-items: flex-start;
+    border-top: 1px solid #000;
+    /* do NOT set position:relative or z-index here — keep normal flow so panels push each other */
+}
+
 .accordion-trigger {
     cursor: pointer;
     font-size: large;
@@ -444,27 +458,41 @@ body.resume-page {
     flex: 0 0 250px;
 }
 
-/* 3. The Content Section: Now using a grid sub-wrapper for smoothness */
+/* Collapsed state uses max-height to hide content but keep it in flow when expanded */
 .content-section {
     flex: 1;
-    display: grid;
-    grid-template-rows: 0fr; /* The "secret" to smooth animation */
-    transition: grid-template-rows 0.4s ease, padding 0.4s ease;
-    overflow: hidden;
+    overflow: hidden;                 /* clip during transition */
+    max-height: 0;                    /* collapsed */
+    transition: max-height 0.36s ease, padding 0.36s ease;
+    padding: 0;                       /* removed when collapsed */
     text-align: left;
     letter-spacing: 1.5px;
     font-size: 15px;
+    display: block;                   /* ensure normal block flow for pushing siblings */
 }
 
-/* 4. Inside the grid, we need a wrapper to make the 0fr/1fr trick work */
+/* Inner wrapper — allow natural height */
 .content-section > div {
-    min-height: 0;
+    padding: 0;        /* padding applied on the container during expand, not inside */
+    min-height: 0;     /* prevent intrinsic overflow issues */
 }
 
-/* 5. The Active State */
+/* Active (expanded) state: set a sufficiently large max-height so content can expand and push siblings */
 .accordion-group.active .content-section {
-    grid-template-rows: 1fr; /* Animates perfectly to the exact content height */
-    padding: 25px 0;
+    max-height: 2000px;   /* large enough for most content; increases real layout height and pushes next group down */
+    padding: 25px 0;      /* restore padding when expanded */
+}
+
+/* ===== Responsive: stack vertically on small screens (same push behavior preserved) ===== */
+@media (max-width: 660px) {
+    .accordion-group {
+        flex-direction: column;
+        
+    }
+
+    .accordion-trigger {
+        flex: 1;
+    }
 }
 
 
@@ -508,6 +536,13 @@ body.resume-page {
     height: auto;
     display: block;
     margin-bottom: 60px;
+}
+
+/* Responsive: Smaller text on smaller screens */
+@media (max-width: 660px) {
+    .bio-text {
+        font-size: 16px;
+    }
 }
 
 /* Grid Layout for Asymmetric Rows */

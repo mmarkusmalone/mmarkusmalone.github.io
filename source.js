@@ -473,7 +473,13 @@ const contentData = {
         type: 'videography',
         title: 'July Fourth',
         videoId: 'rdqAyy6yOmQ', 
-        description: 'An experimental exploration of movement, rhythm, and the poetry of everyday gestures captured through time-lapse and slow-motion cinematography.'
+        description: 'A short video compilation of July Fourth celebrations with family and friends.'
+    },
+    video2: {
+        type: 'videography',
+        title: 'Safari',
+        videoId: '0HARDU8VysU', 
+        description: 'A short video compilation of my family\'s safari trip in South Africa.'
     }
 };
 
@@ -540,13 +546,15 @@ document.addEventListener('DOMContentLoaded', () => {
             photoNav = modalBody.querySelector('.photo-nav');
         }
         
-        // Update image and caption without recreating
+        // Update title, image and caption without recreating
+        const titleEl = modalBody.querySelector('h1');
         const img = photoViewer.querySelector('img');
         const caption = photoViewer.querySelector('.photo-caption');
         const counter = photoNav.querySelector('.photo-counter');
         const prevBtn = photoNav.querySelector('#prevBtn');
         const nextBtn = photoNav.querySelector('#nextBtn');
         
+        titleEl.textContent = title;
         img.src = photo.url;
         img.alt = photo.caption;
         caption.textContent = photo.caption;
@@ -598,6 +606,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 showPhoto(0, content.photos, content.title);
             } else if (content.type === 'videography') {
                 modalContent.classList.add('video-player');
+                // Clear previous content first
+                modalBody.innerHTML = '';
                 modalBody.innerHTML = `
                     <h1>${content.title}</h1>
                     <p>${content.description}</p>
