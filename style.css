@@ -909,3 +909,84 @@ body.resume-page {
 .close-button:hover {
     color: #666;
 }
+
+/* Responsive overlay adjustments for narrow / mobile screens
+   - Prevent text from being clipped by making overlay flow below the image
+   - Reduce font sizes using `clamp()` for better fit while keeping minimum legibility
+   - Show overlay content by default on touch devices (no hover)
+*/
+@media (max-width: 780px) {
+    .image-wrapper {
+        height: auto; /* let image determine height */
+        overflow: visible; /* allow overlay to expand if needed */
+        background: transparent;
+    }
+
+    .image-wrapper img {
+        width: 100%;
+        height: auto;
+        max-height: 50vh; /* keep images reasonably sized on short screens */
+        object-fit: cover;
+    }
+
+    /* Make the overlay participate in flow so it can't be clipped */
+    .project-overlay {
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+        padding: 16px;
+        text-align: left;
+        align-items: flex-start;
+        background: var(--overlay-color, rgba(248,248,246,0.85));
+        pointer-events: auto;
+    }
+
+    /* Scale fonts down but keep minimum readable sizes */
+    .project-overlay h2 {
+        font-size: clamp(18px, 5.5vw, 24px);
+        margin-bottom: 6px;
+    }
+
+    .project-overlay p {
+        font-size: clamp(14px, 4.2vw, 18px);
+        line-height: 1.4;
+        max-width: 100%;
+        margin-bottom: 12px;
+        word-break: break-word;
+    }
+
+    /* Make the view button visible and easier to tap on mobile */
+    .view-btn {
+        opacity: 1; /* show by default on touch screens */
+        transform: none;
+        margin-top: 6px;
+        display: inline-block;
+        pointer-events: auto;
+    }
+
+    /* Remove hover-only hiding on mobile so content is always readable */
+    .image-wrapper:hover .project-overlay h2,
+    .image-wrapper:hover .project-overlay p,
+    .image-wrapper:hover .view-btn,
+    .project-overlay h2,
+    .project-overlay p,
+    .view-btn {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Slightly reduce the gallery height so items fit on short screens */
+    .horizontal-gallery {
+        height: auto;
+        padding: 20px 6vw;
+        gap: 24px;
+        align-items: flex-start;
+    }
+
+    .project-item {
+        height: auto;
+        width: 80vw;
+    }
+}
