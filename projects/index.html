@@ -1,146 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="https://use.typekit.net/lle1kea.css">
-    <title>Projects</title>
-    <script data-goatcounter="https://mayamm.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
-  </head>
-  <body class="projects-page">
-    <nav class="nav-container" id="navMenu">
-      <button class="nav-button" onclick="toggleNav()">
-        <span class="arrow-icon">&#x21dd;</span> 
-      </button>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <link rel="stylesheet" href="../style.css?v=29" />
+  <link rel="stylesheet" href="https://use.typekit.net/lle1kea.css" />
+  <title>Projects — Maya Markus-Malone</title>
+  <script data-goatcounter="https://mayamm.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</head>
+<body class="home-page light-theme">
+  <script src="../theme.js"></script>
+  <header style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: min(760px, calc(100vw - 48px)); z-index: 100; padding: 12px 0 20px; text-align: left;">
+    <p class="site-nav"><a href="../index.html">Go back home</a> or find out more about <a href="../about/">me</a>, my <a href="../projects/">projects</a>, <a href="../writing/">writing</a>, or <a href="../photography/">photography</a>.</p>
+  </header>
 
-      <div class="nav-items">
-        <a href="../index.html" class="item item-1"><img src="../images/homeicon.jpg" alt="Home"></a>
-        <a href="/resume/" class="item item-2"><img src="../images/resumenew.jpg" alt="Resume"></a>
-        <a href="/about/" class="item item-3"><img src="../images/abouticonc.jpg" alt="About"></a>
-        <a href="/writing/" class="item item-4"><img src="../images/writingiconnewc.jpg" alt="Writing"></a>
-      </div>
-    </nav>
-    <header class="gallery-header">
-      <p style = "font-size: 80px;">Projects</p>
-      <p>Selected works / Personal & Hackathons</p>
-    </header>
-    <main class="horizontal-gallery">
-      <section class="project-item" id="project1">
-        <div class="image-wrapper">
-          <img src="../images/projects/vadmap_moving.gif" 
-         data-gif="../images/projects/vadmap_moving.gif" 
-         data-still="../images/projects/vadmap_still.png" 
-         alt="VADMap"
-         style="object-position: right;">
-          <div class="project-overlay">
-            <h2>VADMap &middot; 2024</h2>
-            <p>AI-powered emotional analysis, 3D visualization, and pattern recognition for journal entries.</p>
-            <a href="https://github.com/mmarkusmalone/VADMAP_SITE" class="view-btn">View</a>
-          </div>
-        </div>
-      </section>
+  <main class="home-shell">
+    <div class="home-copy">
+      <p>Projects</p>
 
-      <section class="project-item" id="project2">
-        <div class="image-wrapper">
-          <img src="../images/projects/dance.gif" 
-         data-gif="../images/projects/dance.gif" 
-         data-still="../images/projects/dance_still.png" 
-         alt="Dance Partner"
-          >
-          <div class="project-overlay">
-            <h2>Dance Partner &middot; 2023</h2>
-            <p>Real-time motion tracking aura dance partner.</p>
-            <a href="https://github.com/mmarkusmalone/dance_partner" class="view-btn">View</a>
-          </div>
-        </div>
-      </section>
-      <section class="project-item" id="project3">
-        <div class="image-wrapper">
-          <img src="../images/projects/dreamscape_moving.gif" 
-         data-gif="../images/projects/dreamscape_moving.gif" 
-         data-still="../images/projects/dreamscape_still.png" 
-         alt="Dreamscape"
-         style="object-position: left;">
-          <div class="project-overlay">
-            <h2>Dreamscape &middot; 2025</h2>
-            <p>Map co-occurring themes from dream entries into an interactive graph. </p>
-            <a href="https://github.com/mmarkusmalone/dreamscape" class="view-btn">View</a>
-          </div>
-        </div>
-      </section>
-      <section class="project-item" id="project4">
-        <div class="image-wrapper">
-          <img src="../images/projects/scrap.gif" 
-         data-gif="../images/projects/scrap.gif" 
-         data-still="../images/projects/scrap_still.png" 
-         alt="Scrap"
-          >
-          <div class="project-overlay">
-            <h2>Scrap &middot; 2025</h2>
-            <p>Starter for a digital scrapbook app.</p>
-            <a href="https://github.com/mmarkusmalone/scrap" class="view-btn">View</a>
-          </div>
-        </div>
-      </section>
-      <section class="project-item" id="project5">
-        <div class="image-wrapper">
-          <img src="../images/projects/bcup.gif" 
-         data-gif="../images/projects/bcup.gif" 
-         data-still="../images/projects/bcup_still.png" 
-         alt="BCup"
-          >
-          <div class="project-overlay">
-            <h2>BCup &middot; 2026</h2>
-            <p> HackDuke 2025: A community app to log games, organize tournaments, and keep track of personal game records. </p>
-            <a href="https://github.com/mmarkusmalone/hackcup2025" class="view-btn">View</a>
-          </div>
-        </div>
-      </section>
-      <section class="project-item" id="project6">
-        <div class="image-wrapper">
-          <img src="../images/projects/allies.gif" 
-         data-gif="../images/projects/allies.gif" 
-         data-still="../images/projects/allies_still.png" 
-         alt="Allies"
-          >
-          <div class="project-overlay">
-            <h2>Allies &middot; 2020</h2>
-            <p>A website for my letter-writing campaign supporting those newly diagnosed with JIA.</p>
-            <a href="https://allieswithadvice.org" class="view-btn">View</a>
-          </div>
-        </div>
-      </section>
-      <section class="project-item" id="project7">
-        <div class="image-wrapper">
-          <img src="../images/projects/mood_moving.gif" 
-         data-gif="../images/projects/mood_moving.gif" 
-         data-still="../images/projects/mood_still.png" 
-         alt="Mood"
-          >
-          <div class="project-overlay">
-            <h2>Mood-Based Song Search &middot; 2026</h2>
-            <p>Searches for songs or albums in the user's library matching mood-based queries.</p>
-            <a href="https://github.com/alanazinkin/SpotiSearch" class="view-btn">View</a>
-          </div>
-        </div>
-      </section>
-      <section class="project-item" id="project8">
-        <div class="image-wrapper">
-          <img src="../images/projects/kid.gif" 
-         data-gif="../images/projects/kid.gif" 
-         data-still="../images/projects/kid_still.png" 
-         alt="Kid"
-          >
-          <div class="project-overlay">
-            <h2>KidFolio &middot; 2023</h2>
-            <p>HackForGood 2023: An investing kids game that promotes financial literacy.</p>
-            <a href="https://github.com/mmarkusmalone/kidfolio" class="view-btn">View</a>
-          </div>
-        </div>
-      </section>
-    </main>
+      <ul class="project-list album-list">
+        <li>
+          <a class="project-row album-row link-row" href="https://github.com/mmarkusmalone/hackcup2025" target="_blank" rel="noreferrer">
+            <div class="project-info">
+              <p class="project-title"><span class="link-icon" aria-hidden="true"></span>BCup, 2026</p>
+            </div>
+          </a>
+        </li>
 
-    <script src="../source.js"></script>
-  </body>
+        <li>
+          <a class="project-row album-row link-row" href="https://github.com/alanazinkin/SpotiSearch" target="_blank" rel="noreferrer">
+            <div class="project-info">
+              <p class="project-title"><span class="link-icon" aria-hidden="true"></span>Mood-Based Song Search, 2026</p>
+            </div>
+          </a>
+        </li>
+
+        <li>
+          <a class="project-row album-row link-row" href="https://github.com/mmarkusmalone/dreamscape" target="_blank" rel="noreferrer">
+            <div class="project-info">
+              <p class="project-title"><span class="link-icon" aria-hidden="true"></span>Dreamscape, 2025</p>
+            </div>
+          </a>
+        </li>
+
+        <li>
+          <a class="project-row album-row link-row" href="https://github.com/mmarkusmalone/scrap" target="_blank" rel="noreferrer">
+            <div class="project-info">
+              <p class="project-title"><span class="link-icon" aria-hidden="true"></span>Scrap, 2025</p>
+            </div>
+          </a>
+        </li>
+
+        <li>
+          <a class="project-row album-row link-row" href="https://github.com/mmarkusmalone/VADMAP_SITE" target="_blank" rel="noreferrer">
+            <div class="project-info">
+              <p class="project-title"><span class="link-icon" aria-hidden="true"></span>VADMap, 2024</p>
+            </div>
+          </a>
+        </li>
+
+        <li>
+          <a class="project-row album-row link-row" href="https://github.com/mmarkusmalone/dance_partner" target="_blank" rel="noreferrer">
+            <div class="project-info">
+              <p class="project-title"><span class="link-icon" aria-hidden="true"></span>Dance Partner, 2023</p>
+            </div>
+          </a>
+        </li>
+
+        <li>
+          <a class="project-row album-row link-row" href="https://github.com/mmarkusmalone/kidfolio" target="_blank" rel="noreferrer">
+            <div class="project-info">
+              <p class="project-title"><span class="link-icon" aria-hidden="true"></span>KidFolio, 2023</p>
+            </div>
+          </a>
+        </li>
+
+        <li>
+          <a class="project-row album-row link-row" href="https://allieswithadvice.org" target="_blank" rel="noreferrer">
+            <div class="project-info">
+              <p class="project-title"><span class="link-icon" aria-hidden="true"></span>Allies, 2020</p>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </main>
+
+  <script src="../source.js?v=28"></script>
+</body>
 </html>

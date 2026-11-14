@@ -7,7 +7,7 @@ function toggleNav() {
 document.addEventListener('click', function(event) {
     const nav = document.getElementById('navMenu');
     // Check if the click was outside the nav container
-    if (!nav.contains(event.target)) {
+    if (nav && !nav.contains(event.target)) {
         nav.classList.remove('active');
     }
 });
@@ -292,6 +292,212 @@ const contentData = {
         <p>But I won’t, because I know that I can make them squeamish by simply washing my face and going to the bathroom. I want to teach them a lesson, but I want to learn as well. The bathroom offers daily lessons in how to walk away from an unflushed toilet, how to expose your toes to the cold tile, and how to undo years of mom’s training. So, I return to the filth. I return to my bathroom.</p>
 
         `
+    },
+    japan: {
+        type: 'photography',
+        title: 'japan',
+        photos: [
+            { url: '/images/writing/asia/japan/DSCF0478.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/DSCF0560.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/DSCF0573.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/DSCF0656.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/DSCF0748.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/DSCF0762.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/DSCF0789.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/DSCF0800.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/DSCF0881.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/DSCF1041.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/DSCF1047.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/DSCF1092.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/DSCF1094.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/DSCF1144.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/DSCF1145.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/DSCF1182.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/DSCF1198.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/DSCF1206.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/DSCF1246.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/DSCF1256.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/DSCF1273.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/DSCF1330.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/DSCF1375.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/DSCF1390.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/DSCF1392.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/DSCF1394.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/DSCF1432.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/DSCF1433.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/DSCF1437.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/DSCF1503.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/DSCF1569.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/DSCF1574.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/DSCF1584.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/DSCF1586.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/DSCF1639.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/DSCF1648.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/DSCF1685.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/IMG_0016.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/IMG_0019.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/IMG_0021.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/IMG_0023.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/IMG_0025.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/IMG_0029.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/IMG_0031.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/IMG_0035.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/IMG_0039.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/IMG_0041.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/IMG_0043.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/IMG_0044.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/IMG_0045.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/IMG_0050.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/IMG_0053.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/IMG_0056.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/IMG_0059.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/IMG_0063.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/IMG_0064.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/IMG_0067.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/IMG_0068.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/IMG_0071.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/IMG_0072.jpg', caption: 'Japan' },
+            { url: '/images/writing/asia/japan/IMG_0129.jpg', caption: 'Japan' }
+        ]
+    },
+    thailand: {
+        type: 'photography',
+        title: 'thailand',
+        photos: [
+            { url: '/images/writing/asia/thailand/DSCF1717.jpg', caption: 'Thailand' },
+            { url: '/images/writing/asia/thailand/DSCF1742.jpg', caption: 'Thailand' },
+            { url: '/images/writing/asia/thailand/DSCF1749.jpg', caption: 'Thailand' },
+            { url: '/images/writing/asia/thailand/DSCF1785.jpg', caption: 'Thailand' },
+            { url: '/images/writing/asia/thailand/DSCF1791.jpg', caption: 'Thailand' },
+            { url: '/images/writing/asia/thailand/DSCF1797.jpg', caption: 'Thailand' },
+            { url: '/images/writing/asia/thailand/DSCF1907.jpg', caption: 'Thailand' },
+            { url: '/images/writing/asia/thailand/DSCF1949.jpg', caption: 'Thailand' },
+            { url: '/images/writing/asia/thailand/DSCF1976.jpg', caption: 'Thailand' },
+            { url: '/images/writing/asia/thailand/DSCF1979.jpg', caption: 'Thailand' }
+        ]
+    },
+    bali: {
+        type: 'photography',
+        title: 'bali',
+        photos: [
+            { url: '/images/writing/asia/bali/DSCF2053.jpg', caption: 'Bali' },
+            { url: '/images/writing/asia/bali/DSCF2077.jpg', caption: 'Bali' },
+            { url: '/images/writing/asia/bali/DSCF2082.jpg', caption: 'Bali' },
+            { url: '/images/writing/asia/bali/DSCF2106.jpg', caption: 'Bali' },
+            { url: '/images/writing/asia/bali/DSCF2117.jpg', caption: 'Bali' },
+            { url: '/images/writing/asia/bali/DSCF2120.jpg', caption: 'Bali' },
+            { url: '/images/writing/asia/bali/DSCF2125.jpg', caption: 'Bali' },
+            { url: '/images/writing/asia/bali/DSCF2136.jpg', caption: 'Bali' },
+            { url: '/images/writing/asia/bali/DSCF2139.jpg', caption: 'Bali' },
+            { url: '/images/writing/asia/bali/DSCF2156.jpg', caption: 'Bali' },
+            { url: '/images/writing/asia/bali/DSCF2160.jpg', caption: 'Bali' },
+            { url: '/images/writing/asia/bali/DSCF2170.jpg', caption: 'Bali' },
+            { url: '/images/writing/asia/bali/DSCF2179.jpg', caption: 'Bali' },
+            { url: '/images/writing/asia/bali/DSCF2183.jpg', caption: 'Bali' },
+            { url: '/images/writing/asia/bali/DSCF2200.jpg', caption: 'Bali' },
+            { url: '/images/writing/asia/bali/DSCF2216.jpg', caption: 'Bali' },
+            { url: '/images/writing/asia/bali/DSCF2257.jpg', caption: 'Bali' },
+            { url: '/images/writing/asia/bali/DSCF2259.jpg', caption: 'Bali' },
+            { url: '/images/writing/asia/bali/DSCF2262.jpg', caption: 'Bali' },
+            { url: '/images/writing/asia/bali/DSCF2282.jpg', caption: 'Bali' },
+            { url: '/images/writing/asia/bali/DSCF2290.jpg', caption: 'Bali' },
+            { url: '/images/writing/asia/bali/DSCF2296.jpg', caption: 'Bali' },
+            { url: '/images/writing/asia/bali/DSCF2302.jpg', caption: 'Bali' },
+            { url: '/images/writing/asia/bali/DSCF2334.jpg', caption: 'Bali' },
+            { url: '/images/writing/asia/bali/DSCF2350.jpg', caption: 'Bali' },
+            { url: '/images/writing/asia/bali/DSCF2369.jpg', caption: 'Bali' },
+            { url: '/images/writing/asia/bali/DSCF2382.jpg', caption: 'Bali' },
+            { url: '/images/writing/asia/bali/DSCF2389.jpg', caption: 'Bali' },
+            { url: '/images/writing/asia/bali/DSCF2401.jpg', caption: 'Bali' },
+            { url: '/images/writing/asia/bali/DSCF2405.jpg', caption: 'Bali' },
+            { url: '/images/writing/asia/bali/DSCF2406.jpg', caption: 'Bali' },
+            { url: '/images/writing/asia/bali/DSCF2407.jpg', caption: 'Bali' },
+            { url: '/images/writing/asia/bali/DSCF2415.jpg', caption: 'Bali' },
+            { url: '/images/writing/asia/bali/DSCF2418.jpg', caption: 'Bali' },
+            { url: '/images/writing/asia/bali/DSCF2426.jpg', caption: 'Bali' },
+            { url: '/images/writing/asia/bali/DSCF2456.jpg', caption: 'Bali' }
+        ]
+    },
+    vietnam: {
+        type: 'photography',
+        title: 'vietnam',
+        photos: [
+            { url: '/images/writing/asia/vietnam/DSCF2478.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF2483.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF2488.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF2494.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF2500.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF2545.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF2571.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF2592.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF2600.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF2616.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF2738.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF2741.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF2765.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF2766.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF2818.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF2820.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF2864.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF2908.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF2918.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF2928.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF2932.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF2941.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF2949.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF2974.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF2975.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF2978.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF2982.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF2985.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF2988.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF2992.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF3005.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF3009.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF3012.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF3020.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF3034.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF3039.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF3041.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF3138.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF3142.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF3157.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF3187.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF3196.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF3199.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF3244.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF3246.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF3253.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF3258.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF3261.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF3264.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF3265.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF3268.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF3273.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF3279.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF3281.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF3295.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF3308.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF3330.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF3337.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF3347.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF3350.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF3354.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF3360.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF3367.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF3373.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF3377.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF3381.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF3386.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF3396.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF3403.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF3417.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF3420.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF3422.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF3436.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF3463.jpg', caption: 'Vietnam' },
+            { url: '/images/writing/asia/vietnam/DSCF3465.jpg', caption: 'Vietnam' }
+        ]
     },
     southafrica: {
         type: 'photography',
@@ -660,4 +866,206 @@ document.querySelectorAll('.image-wrapper').forEach(wrapper => {
     wrapper.addEventListener('mouseleave', () => {
         if (gifSrc) img.src = gifSrc;
     });
+});
+// Photography and writing lists: clicking a row expands its photos, video, or story underneath.
+// Content is built on first open so full-size photos aren't loaded up front.
+document.querySelectorAll('.album').forEach(album => {
+    const row = album.querySelector('.album-row');
+    const panel = album.querySelector('.album-content');
+    const content = contentData[album.dataset.id];
+    if (!content) return;
+
+
+    const toggleAlbum = () => {
+        if (!panel.dataset.loaded) {
+            if (content.type === 'photography') {
+                // The album's cover photo leads the collage
+                const coverPath = new URL(album.dataset.cover, location.href).pathname;
+                const photos = [
+                    { url: coverPath, caption: content.photos[0]?.caption || content.title },
+                    ...content.photos.filter(photo => photo.url !== coverPath)
+                ];
+                panel.innerHTML = `<div class="album-photos">${photos.map(photo => `
+                    <figure class="album-photo">
+                        <span class="photo-frame">
+                            <img loading="lazy" src="${photo.url}" alt="${photo.caption}">
+                            <button class="photo-expand" aria-label="Expand photo" aria-expanded="false"></button>
+                        </span>
+                    </figure>`).join('')}</div>`;
+            } else if (content.type === 'writing') {
+                // Stories open in place; drop the bold title line since the row already shows it
+                const story = content.content.replace(/^\s*<p><strong>[^<]*<\/strong><\/p>/, '');
+                panel.innerHTML = `<div class="album-story">${story}</div>`;
+            } else if (content.type === 'videography') {
+                panel.innerHTML = `
+                    <div class="album-video">
+                        <iframe src="https://www.youtube.com/embed/${content.videoId}"
+                                title="${content.title}"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>`;
+            }
+            panel.dataset.loaded = 'true';
+        }
+
+        const open = album.classList.toggle('open');
+        panel.hidden = !open;
+        row.setAttribute('aria-expanded', open);
+
+        const grid = panel.querySelector('.album-photos');
+        if (open && grid) {
+            setupAlbumGrid(grid);
+            revealAlbum(grid);
+        }
+    };
+
+    row.addEventListener('click', toggleAlbum);
+    row.addEventListener('keydown', event => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            toggleAlbum();
+        }
+    });
+});
+
+// Masonry collage for an open album. Photos are absolutely positioned so an
+// expanded photo can grow in place and the rest wrap around it with no white
+// gaps: tall photos span two columns (the third keeps flowing beside them),
+// wide photos span all columns, and any column that ends short of the
+// expanded photo has its last photo stretched down to meet it (cropped by
+// object-fit: cover rather than distorted).
+const PHOTO_GAP = 12;
+
+function layoutAlbum(grid) {
+    const width = grid.clientWidth;
+    if (!width) return;
+
+    const columns = width < 500 ? 2 : 3;
+    const columnWidth = (width - PHOTO_GAP * (columns - 1)) / columns;
+    const heights = new Array(columns).fill(0);
+    const lastInColumn = new Array(columns).fill(null);
+    const placed = [];
+
+    grid.querySelectorAll('.album-photo').forEach(photo => {
+        const img = photo.querySelector('img');
+        // Until an image loads, assume a 4:3 landscape photo
+        const ratio = img.naturalWidth ? img.naturalHeight / img.naturalWidth : 0.75;
+        const span = photo.classList.contains('expanded')
+            ? (ratio > 1 ? Math.min(2, columns) : columns)
+            : 1;
+
+        // Pick the run of `span` adjacent columns that lets the photo sit highest
+        let start = 0;
+        let top = Infinity;
+        for (let c = 0; c + span <= columns; c++) {
+            const runTop = Math.max(...heights.slice(c, c + span));
+            if (runTop < top) {
+                top = runTop;
+                start = c;
+            }
+        }
+
+        const w = span * columnWidth + (span - 1) * PHOTO_GAP;
+        let h = w * ratio;
+        if (span > 1) h = Math.min(h, window.innerHeight * 0.85);
+
+        // Close any gap above a spanning photo by stretching the photo above it
+        for (let c = start; c < start + span; c++) {
+            const gap = top - heights[c];
+            if (gap > 0 && lastInColumn[c]) lastInColumn[c].h += gap;
+        }
+
+        const entry = { photo, x: start * (columnWidth + PHOTO_GAP), y: top, w, h };
+        placed.push(entry);
+        for (let c = start; c < start + span; c++) {
+            heights[c] = top + h + PHOTO_GAP;
+            lastInColumn[c] = entry;
+        }
+    });
+
+    placed.forEach(({ photo, x, y, w, h }) => {
+        photo.style.transform = `translate(${x}px, ${y}px)`;
+        photo.style.width = `${w}px`;
+        photo.style.height = `${h}px`;
+        photo.dataset.top = y;
+        photo.dataset.height = h;
+    });
+
+    grid.style.height = `${Math.max(0, Math.max(...heights) - PHOTO_GAP)}px`;
+}
+
+function scheduleLayout(grid) {
+    if (grid.layoutPending) return;
+    grid.layoutPending = true;
+    requestAnimationFrame(() => {
+        grid.layoutPending = false;
+        layoutAlbum(grid);
+    });
+}
+
+function setupAlbumGrid(grid) {
+    if (!grid.dataset.ready) {
+        grid.dataset.ready = 'true';
+        grid.querySelectorAll('img').forEach(img => {
+            img.addEventListener('load', () => scheduleLayout(grid));
+        });
+        // Only width changes matter; the grid's own height animates during expand
+        let lastWidth = grid.clientWidth;
+        new ResizeObserver(() => {
+            if (grid.clientWidth === lastWidth) return;
+            lastWidth = grid.clientWidth;
+            scheduleLayout(grid);
+        }).observe(grid);
+    }
+    layoutAlbum(grid);
+}
+
+// Opening animation: the collage fades in
+function revealAlbum(grid) {
+    grid.classList.remove('revealing');
+    void grid.offsetWidth;  // restart the fade if the album is reopened
+    grid.classList.add('revealing');
+}
+
+// Animate a re-layout (only for expand/collapse, so image loads don't wobble)
+function animateLayout(grid) {
+    grid.classList.add('animating');
+    layoutAlbum(grid);
+    clearTimeout(grid.animationTimer);
+    grid.animationTimer = setTimeout(() => grid.classList.remove('animating'), 550);
+}
+
+// Photo +/- buttons: expand one photo in place, only one at a time on the page
+document.addEventListener('click', event => {
+    const btn = event.target.closest('.photo-expand');
+    if (!btn) return;
+
+    const photo = btn.closest('.album-photo');
+    const wasExpanded = photo.classList.contains('expanded');
+    const grids = new Set([photo.closest('.album-photos')]);
+
+    document.querySelectorAll('.album-photo.expanded').forEach(open => {
+        open.classList.remove('expanded');
+        const openBtn = open.querySelector('.photo-expand');
+        openBtn.setAttribute('aria-expanded', 'false');
+        openBtn.setAttribute('aria-label', 'Expand photo');
+        grids.add(open.closest('.album-photos'));
+    });
+
+    if (!wasExpanded) {
+        photo.classList.add('expanded');
+        btn.setAttribute('aria-expanded', 'true');
+        btn.setAttribute('aria-label', 'Collapse photo');
+    }
+
+    grids.forEach(animateLayout);
+
+    // Keep the photo in view as it grows or shrinks
+    const grid = photo.closest('.album-photos');
+    const top = grid.getBoundingClientRect().top + window.scrollY + Number(photo.dataset.top);
+    const height = Number(photo.dataset.height);
+    const target = height < window.innerHeight
+        ? top - (window.innerHeight - height) / 2
+        : top - 80;
+    window.scrollTo({ top: Math.max(0, target), behavior: 'smooth' });
 });

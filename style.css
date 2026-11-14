@@ -2,101 +2,214 @@
     box-sizing: border-box;
 }
 
-body, html {
+html, body {
     margin: 0;
     padding: 0;
-    height: 100%;
+    min-height: 100%;
     font-family: "neue-haas-grotesk-display", sans-serif;
-    letter-spacing: 1px;
+    letter-spacing: 0.02em;
     font-style: normal;
-    font-size: x-small;
-    overflow-x: hidden; /* Prevents horizontal scrolling */
 }
 
-/* STYLE FOR MAIN PAGE */
-
-.portfolio-grid {
-    display: grid;
-    /* Left: Auto, Middle: 25%, Right: Auto */
-    grid-template-columns: 1fr 20% 1fr;
-    height: 100vh; /* Takes up 100% of the screen height */
-    width: 100vw;  /* Takes up 100% of the screen width */
+body {
+    min-height: 100vh;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.side-column {
-    display: grid;
-    /* Creates two rows that always take up 50% height each */
-    grid-template-rows: 1fr 1fr;
-    height: 100%;
+body.light-theme {
+    background: #ffffff;
+    color: #111111;
 }
 
-.grid-item {
+body.dark-theme {
+    background: #0f1115;
+    color: #f3f3f1;
+}
+
+/* Keep overscroll areas dark too */
+html:has(body.dark-theme) {
+    background: #0f1115;
+}
+
+body.home-page {
+    position: relative;
     display: block;
-    width: 100%;
-    height: 100%;
+    padding-top: 76px;
 }
 
-.grid-item img {
-    width: 100%;
-    height: 100%;
-    display: block;
-    /* This ensures images fill the 50% box without stretching */
-    object-fit: cover;
-
+.home-shell {
+    width: min(760px, calc(100vw - 48px));
+    margin: 0 auto;
+    padding: 48px 0;
 }
 
-.bio-column {
-    padding: 40px 20px;
-    background-color: #fff;
+.home-copy {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: left;
-    /* text-align: center; */
-
+    gap: 0.45rem;
 }
 
-.bio-column p {
-    font-size: 1.5rem;
-    line-height: 1.3;
-    margin-bottom: 20px;
+.home-copy p,
+.home-copy li,
+.site-nav {
+    font-size: clamp(1.2rem, 2vw, 2rem);
+    line-height: 1.5;
+    margin: 0;
+    font-weight: 400;
 }
 
-/* For mobile: stack vertically and let height adjust to content */
-@media (max-width: 780px) {
-    .portfolio-grid {
+.home-copy p:first-child {
+    margin-bottom: 0.35rem;
+}
+
+.recently {
+    margin-top: 0.7rem;
+}
+
+/* Recently read: Goodreads covers under the Spotify widget */
+.reading {
+    margin-top: 1.5rem;
+}
+
+/* Same type as the "Recently:" heading */
+.home-copy .reading-label {
+    margin-bottom: 0.35rem;
+    font-weight: 500;
+}
+
+.reading-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    max-width: 400px;
+}
+
+.reading-book img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.reading-book:hover img {
+    transform: translateY(-4px);
+    opacity: 0.85;
+}
+
+.recently p {
+    margin-bottom: 0.35rem;
+    font-weight: 500;
+}
+
+.recently ul {
+    margin: 0;
+    padding-left: 1.5rem;
+    display: grid;
+    gap: 0.2rem;
+}
+
+.recently li {
+    list-style: disc;
+}
+
+/* Projects list: gif on the left, title / description / link on the right */
+.project-list {
+    list-style: none;
+    margin: 0.7rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+.project-row {
+    display: grid;
+    grid-template-columns: minmax(0, 0.5fr) minmax(0, 1fr);
+    gap: 1.75rem;
+    align-items: center;
+}
+
+/* Rounded frame with the per-project tint (--overlay-color from #projectN) */
+.project-media {
+    position: relative;
+    overflow: hidden;
+    border-radius: clamp(10px, 1.2vw, 14px);
+}
+
+.project-media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--overlay-color, transparent);
+    pointer-events: none;
+}
+
+.project-media img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    display: block;
+}
+
+.project-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.home-copy .project-info p {
+    margin: 0;
+}
+
+.home-copy .project-desc,
+.project-link {
+    font-size: clamp(0.95rem, 1.3vw, 1.2rem);
+    line-height: 1.45;
+}
+
+.home-copy .project-desc {
+    color: #555;
+}
+
+.project-link {
+    color: inherit;
+}
+
+@media (max-width: 640px) {
+    .home-shell {
+        width: min(100vw - 30px, 560px);
+        padding: 32px 0;
+    }
+
+    .home-copy p,
+    .home-copy li,
+    .site-nav {
+        font-size: clamp(1.05rem, 5vw, 1.7rem);
+    }
+
+    /* Stack gif above text on narrow screens */
+    .project-row {
         grid-template-columns: 1fr;
-        height: auto;
-        display: flex;
-        flex-direction: column;
+        gap: 0.8rem;
     }
-    .bio-column {
-        order: -1;
+
+    .home-copy .project-desc,
+    .project-link {
+        font-size: 1rem;
     }
-    .side-column {
-        height: auto;
-        grid-template-rows: repeat(2, 300px); /* Fixed height on mobile so images don't vanish */
-    }
-    .grid-item {
-        padding-top: 7px;
-        padding-bottom: 7px;
-    }
-    .project-item { width: 80vw; }
 }
 
-/* STYLE FOR PROJECT PAGE */
-
-/* Typography & Reset */
+/* Keep existing project page styles below for other pages in the mock site */
 body.projects-page {
     margin: 0;
-    background-color: white; /* Off-white like the image */
-    overflow: hidden; /* Prevents vertical scroll */
+    background-color: white;
+    overflow: hidden;
     height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
-/* Top Center Header */
 .gallery-header {
     text-align: center;
     padding: 10px 0;
@@ -110,7 +223,6 @@ body.projects-page {
     margin: 20px;
 }
 
-/* Horizontal Scroll Container */
 .horizontal-gallery {
     display: flex;
     overflow-x: auto;
@@ -118,21 +230,19 @@ body.projects-page {
     scroll-snap-type: x mandatory;
     height: 60vh;
     align-items: center;
-    padding: 0 10vw; /* Padding so first/last items center */
+    padding: 0 10vw;
     gap: 40px;
     -webkit-overflow-scrolling: touch;
     border-bottom: black 1px solid;
 }
 
-/* Hide Scrollbar */
 .horizontal-gallery::-webkit-scrollbar {
     display: none;
 }
 
-/* Gallery Item */
 .project-item {
     flex: 0 0 auto;
-    width: 40vw; /* Width of the "focus" image */
+    width: 40vw;
     height: 100%;
     scroll-snap-align: center;
     transition: transform 0.5s ease;
@@ -157,22 +267,20 @@ body.projects-page {
     transition: filter 0.3s;
 }
 
-/* Hover Content */
-
-#project1 { 
-    --overlay-color: rgba(134, 206, 219, 0.5); 
+#project1 {
+    --overlay-color: rgba(134, 206, 219, 0.5);
     --hover-color: rgba(134, 206, 219, 0.8);
     --text-color: rgba(4, 45, 52);
-} 
+}
 #project2 {
     --overlay-color: rgba(255, 100, 126, 0.5);
     --hover-color: rgba(255, 100, 126, 0.8);
     --text-color: rgba(75, 4, 16);
 }
-#project3 { 
-    --overlay-color: rgba(71, 86, 119, 0.3); 
+#project3 {
+    --overlay-color: rgba(71, 86, 119, 0.3);
     --hover-color: rgba(46, 67, 111, 0.8);
-    --text-color: rgb(107, 121, 156);   
+    --text-color: rgb(107, 121, 156);
 }
 #project4 {
     --overlay-color: rgba(133, 115, 179, 0.3);
@@ -204,7 +312,7 @@ body.projects-page {
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background: var(--overlay-color, rgba(248, 248, 246, 0.5)); 
+  background: var(--overlay-color, rgba(248, 248, 246, 0.5));
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -212,27 +320,24 @@ body.projects-page {
   padding: 30px;
   text-align: center;
   transition: background 0.4s ease;
-  color:  var(--text-color,black); 
-  pointer-events: none; 
+  color: var(--text-color, black);
+  pointer-events: none;
 }
 
-/* Hide all text/button content by default */
-.project-overlay h2, 
-.project-overlay p, 
+.project-overlay h2,
+.project-overlay p,
 .view-btn {
   opacity: 0;
-  transform: translateY(10px); /* Subtle slide-up effect */
+  transform: translateY(10px);
   transition: all 0.4s ease;
-  color:  var(--text-color,black); 
-  pointer-events: auto; 
+  color: var(--text-color, black);
+  pointer-events: auto;
 }
 
 .image-wrapper:hover .project-overlay {
-  /* Swap to the more opaque version */
   background: var(--hover-color, rgba(248, 248, 246, 0.9));
 }
 
-/* Show everything on hover */
 .image-wrapper:hover .project-overlay h2,
 .image-wrapper:hover .project-overlay p,
 .image-wrapper:hover .view-btn {
@@ -240,38 +345,24 @@ body.projects-page {
   transform: translateY(0);
 }
 
-/* Optional: Slight delay for the button to make it feel more polished */
 .image-wrapper:hover .view-btn {
   transition-delay: 0.1s;
 }
 
 .project-overlay h2 {
-    font-size: 28px;         /* Larger size for the title */
-    font-weight: 700;       /* Makes it bold */
-    margin-bottom: 8px;     /* Space between title and description */
-    text-transform: uppercase; /* Optional: makes it look modern */
-    letter-spacing: 1px;    /* Optional: adds a clean, spaced-out look */
-}
-
-/* The Project Description */
-.project-overlay p {
-    font-size: 20px;         /* Standard readable size */
-    line-height: 1.4;       /* Adds breathing room between lines of text */
-    max-width: 80%;         /* Keeps text from hitting the edges */
-    margin-bottom: 20px;    /* Space before the 'View Details' button */
-}
-
-.view-btn {
-    text-decoration: none;
-    color:  var(--text-color,black); 
-    border-bottom: 1px solid var(--text-color,black);
-    font-weight: bold;
-    font-size: 16px;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
     text-transform: uppercase;
-    margin-top:10px;
-    opacity: 0;
+    letter-spacing: 1px;
 }
 
+.project-overlay p {
+    font-size: 20px;
+    line-height: 1.4;
+    max-width: 80%;
+    margin: 0 auto 10px;
+}
 
 /* STYLE FOR NAV BUTTONS */
 
@@ -417,9 +508,17 @@ body.resume-page {
 
 
 .paper {
-    margin: 20px 50px 50px 50px;
-    padding: 50px;
+    width: min(760px, calc(100vw - 48px));
+    margin: 0 auto;
+    padding: 48px 0;
     background-color: white;
+}
+
+@media (max-width: 660px) {
+    .paper {
+        width: min(100vw - 30px, 560px);
+        padding: 32px 0;
+    }
 }
 
 .resume-header p {
@@ -428,46 +527,131 @@ body.resume-page {
     letter-spacing: 1px;
 }
 
-/* Accordion Styling */
-
-/* Update the group to align items horizontally */
-/* 1. Parent group stays flex to keep items side-by-side */
-.accordion-group {
-    display: flex;
-    align-items: flex-start;
-    border-top: 1px solid #000;
-    position: relative; /* <-- required so z-index works */
-    z-index: 0;
+/* Resume in dark mode: drop the hard-coded white page and black text */
+body.resume-page.dark-theme,
+body.dark-theme .paper {
+    background-color: #0f1115;
 }
 
-/* 2. Trigger stays fixed width */
+body.dark-theme .resume-header p {
+    color: inherit;
+}
+
+/* Accordion Styling */
+
 .accordion-group {
     display: flex;
+    flex-direction: column;
     align-items: flex-start;
-    border-top: 1px solid #000;
-    /* do NOT set position:relative or z-index here — keep normal flow so panels push each other */
 }
 
 .accordion-trigger {
     cursor: pointer;
-    font-size: large;
-    font-weight: normal;
-    padding: 25px 0;
+    font-size: inherit;
+    font-weight: 400;
+    padding: 0;
     margin: 0;
     text-align: left;
-    flex: 0 0 250px;
+}
+
+/* Arrow indicator for accordions */
+/* Drawn plus/minus, centered on the cap height of the text */
+.accordion-group {
+    --icon-size: 0.5em;
+    --icon-gap: 0.7em;
+}
+
+.accordion-arrow {
+    display: inline-block;
+    position: relative;
+    width: var(--icon-size);
+    height: var(--icon-size);
+    vertical-align: calc(0.35em - var(--icon-size) / 2);
+    margin-right: var(--icon-gap);
+}
+
+/* Indent opened text so it lines up with the heading text, not the icon */
+.accordion-trigger:has(.accordion-arrow) + .content-section p {
+    padding-left: calc(var(--icon-size) + var(--icon-gap));
+}
+
+.accordion-arrow::before,
+.accordion-arrow::after {
+    content: "";
+    position: absolute;
+    background: currentColor;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 1.5px;
+    transform: translateY(-50%);
+}
+
+/* Vertical bar of the plus; hidden when open to leave a minus */
+.accordion-arrow::after {
+    transform: translateY(-50%) rotate(90deg);
+}
+
+.accordion-group.active .accordion-arrow::after {
+    display: none;
+}
+
+/* About intro section */
+.about-intro {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.about-intro h1 {
+    font-size: clamp(1.2rem, 2vw, 2rem);
+    font-weight: 400;
+    line-height: 1.5;
+    margin: 0 0 16px 0;
+}
+
+.about-intro p {
+    font-size: clamp(1.2rem, 2vw, 2rem);
+    font-weight: 400;
+    line-height: 1.5;
+    margin: 0 0 0.45rem 0;
+}
+
+@media (max-width: 660px) {
+    .about-intro h1,
+    .about-intro p {
+        font-size: clamp(1.05rem, 5vw, 1.7rem);
+    }
+}
+
+/* Contact section - always visible */
+.contact-section {
+    padding: 20px 0;
+    text-align: left;
+}
+
+.contact-section h1 {
+    font-size: large;
+    font-weight: normal;
+    margin: 0 0 10px 0;
+}
+
+.contact-section p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0 0 8px 0;
 }
 
 /* Collapsed state uses max-height to hide content but keep it in flow when expanded */
 .content-section {
-    flex: 1;
+    width: 100%;
     overflow: hidden;                 /* clip during transition */
     max-height: 0;                    /* collapsed */
     transition: max-height 0.36s ease, padding 0.36s ease;
     padding: 0;                       /* removed when collapsed */
     text-align: left;
-    letter-spacing: 1.5px;
-    font-size: 15px;
+    font-size: inherit;
+    line-height: inherit;
     display: block;                   /* ensure normal block flow for pushing siblings */
 }
 
@@ -477,23 +661,16 @@ body.resume-page {
     min-height: 0;     /* prevent intrinsic overflow issues */
 }
 
+.content-section p {
+    margin: 0 0 12px 0;
+}
+
 /* Active (expanded) state: set a sufficiently large max-height so content can expand and push siblings */
 .accordion-group.active .content-section {
     max-height: 2000px;   /* large enough for most content; increases real layout height and pushes next group down */
-    padding: 25px 0;      /* restore padding when expanded */
+    padding: 0 0 20px 0;      /* restore padding when expanded */
 }
 
-/* ===== Responsive: stack vertically on small screens (same push behavior preserved) ===== */
-@media (max-width: 660px) {
-    .accordion-group {
-        flex-direction: column;
-        
-    }
-
-    .accordion-trigger {
-        flex: 1;
-    }
-}
 
 
 /* 5. ABOUT ME STYLING */
@@ -625,12 +802,50 @@ body.resume-page {
 /* Writing Grid */
 .writing-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); 
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
     gap: 50px 30px;
     padding: 40px;
     max-width: 1300px;
     margin: 0 auto;
     align-items: start;
+}
+
+/* Writing List Style */
+ul.writing-list {
+    list-style: disc;
+    padding-left: 20px;
+    margin: 0;
+}
+
+ul.writing-list li {
+    margin-bottom: 20px;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+ul.writing-list .writing-title {
+    font-weight: normal;
+}
+
+ul.writing-list .writing-desc {
+    color: #666;
+    margin-left: 8px;
+}
+
+ul.writing-list .read-btn {
+    background: transparent;
+    border: none;
+    color: #0077b6;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0;
+    margin-left: 8px;
+    text-decoration: underline;
+    font-family: inherit;
+}
+
+ul.writing-list .read-btn:hover {
+    color: #005b8d;
 }
 
 .story-card {
@@ -989,4 +1204,548 @@ body.resume-page {
         height: auto;
         width: 80vw;
     }
+}
+
+body.light-theme a,
+body.dark-theme a {
+    color: #0077b6;
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+    text-decoration-thickness: 1.5px;
+    transition: color 0.2s ease;
+}
+
+body.light-theme a:hover,
+body.dark-theme a:hover,
+body.light-theme a:focus,
+body.dark-theme a:focus {
+    color: #005b8d;
+    text-decoration: underline;
+}
+
+body.light-theme a:visited,
+body.dark-theme a:visited {
+    color: #5b7a99;
+    text-decoration: underline;
+}
+
+/* Top Banner Styles */
+.top-banner {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(760px, calc(100vw - 48px));
+    z-index: 20;
+    background: white;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    padding-top: 48px;
+}
+
+/* Top navigation - same size as home-copy */
+header.top-nav {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    z-index: 100;
+    background: white;
+    padding: 48px 0 20px 0;
+    text-align: center;
+}
+
+header.top-nav p {
+    margin: 0;
+    font-size: clamp(1.2rem, 2vw, 2rem);
+    line-height: 1.5;
+    font-weight: 400;
+}
+
+@media (max-width: 660px) {
+    header.top-nav {
+        padding: 32px 20px 16px 20px;
+    }
+    header.top-nav p {
+        font-size: clamp(1.05rem, 5vw, 1.7rem);
+    }
+}
+
+@media (max-width: 660px) {
+    .top-banner {
+        width: min(100vw - 30px, 560px);
+        padding-top: 32px;
+    }
+}
+
+body.home-page .top-banner {
+    background: white;
+    border: none;
+    box-shadow: none;
+}
+
+body:not(.home-page) .top-banner,
+body.projects-page .top-banner,
+body.about-page .top-banner,
+body.writing-page .top-banner {
+    background: white;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+body.dark-theme .top-banner {
+    background: black;
+    box-shadow: none;
+}
+
+header.top-banner p {
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    font-size: clamp(1.2rem, 2vw, 2rem) !important;
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+    font-weight: 400;
+}
+
+@media (max-width: 660px) {
+    header.top-banner p {
+        font-size: clamp(1.05rem, 5vw, 1.7rem) !important;
+    }
+}
+
+/* Spotify Widget */
+.spotify-widget {
+    margin-top: 1.5rem;
+}
+
+.spotify-link {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-decoration: none !important;
+    color: inherit;
+    padding: 12px;
+    background: #f8f8f8;
+    border-radius: 4px;
+    transition: background 0.2s ease;
+    max-width: 400px;
+}
+
+body.dark-theme .spotify-link {
+    background: #1a1a1a;
+}
+
+.spotify-link:hover {
+    background: #f0f0f0;
+}
+
+body.dark-theme .spotify-link:hover {
+    background: #252525;
+}
+
+.spotify-album {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 2px;
+}
+
+.spotify-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.spotify-title {
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    font-weight: 500;
+}
+
+.spotify-artist {
+    font-size: clamp(0.9rem, 1.3vw, 1rem);
+    color: #666;
+}
+
+body.dark-theme .spotify-artist {
+    color: #999;
+}
+
+.spotify-not-playing {
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    color: #999;
+    font-style: italic;
+    margin: 0;
+}
+
+.spotify-loading {
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    color: #999;
+}
+
+/* Same type as the "Recently:" heading */
+.home-copy .spotify-label {
+    margin-bottom: 0.35rem;
+    font-weight: 500;
+}
+/* Header link styling on pages without the light-theme body class (resume) */
+.site-nav a {
+    color: #0077b6;
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+    text-decoration-thickness: 1.5px;
+    transition: color 0.2s ease;
+}
+
+.site-nav a:hover,
+.site-nav a:focus {
+    color: #005b8d;
+}
+
+/* Pages with a big centered title: leave room so the nav doesn't cover it */
+body:has(.resume-top),
+body:has(.writing-header) {
+    padding-top: 4.5rem;
+}
+
+/* Photography list: rows reuse the projects layout and expand to show
+   the album's photos or video underneath */
+.album-row {
+    cursor: pointer;
+}
+
+/* Albums start as just a title line */
+.album-list {
+    gap: 0.9rem;
+}
+
+.album-row {
+    grid-template-columns: 1fr;
+}
+
+/* Drawn plus/minus before the title, same as the about page accordions */
+.album-icon {
+    --icon-size: 0.5em;
+    display: inline-block;
+    position: relative;
+    width: var(--icon-size);
+    height: var(--icon-size);
+    vertical-align: calc(0.35em - var(--icon-size) / 2);
+    margin-right: 0.5em;
+}
+
+.album-icon::before,
+.album-icon::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 1.5px;
+    background: currentColor;
+    transform: translateY(-50%);
+}
+
+.album-icon::after {
+    transform: translateY(-50%) rotate(90deg);
+}
+
+.album.open .album-icon::after {
+    display: none;
+}
+
+/* Projects: rows are links that open in a new tab, marked with a drawn
+   ↗ arrow in place of the plus */
+.link-icon {
+    --icon-size: 0.5em;
+    display: inline-block;
+    position: relative;
+    width: var(--icon-size);
+    height: var(--icon-size);
+    vertical-align: calc(0.35em - var(--icon-size) / 2);
+    margin-right: 0.5em;
+}
+
+/* Diagonal shaft, corner to corner */
+.link-icon::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 141%;
+    height: 1.5px;
+    background: currentColor;
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+/* Arrowhead in the top-right corner */
+.link-icon::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60%;
+    height: 60%;
+    border-top: 1.5px solid currentColor;
+    border-right: 1.5px solid currentColor;
+}
+
+/* Writing: rows open the story on its own page, marked with a thin dash */
+.page-icon {
+    --icon-size: 0.5em;
+    display: inline-block;
+    position: relative;
+    width: var(--icon-size);
+    height: var(--icon-size);
+    vertical-align: calc(0.35em - var(--icon-size) / 2);
+    margin-right: 0.5em;
+}
+
+.page-icon::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 1.5px;
+    background: currentColor;
+    transform: translateY(-50%);
+}
+
+/* Titles look like the writing and photography rows, not blue links */
+body.light-theme a.link-row,
+body.light-theme a.link-row:visited {
+    color: inherit;
+    text-decoration: none;
+}
+
+body.dark-theme a.link-row,
+body.dark-theme a.link-row:visited {
+    color: inherit;
+    text-decoration: none;
+}
+
+.album-content {
+    margin-top: 1.25rem;
+}
+
+/* Masonry collage laid out by source.js (layoutAlbum): each photo is
+   absolutely positioned so an expanded photo can grow in place and the
+   others slide around it */
+.album-photos {
+    --photo-radius: clamp(8px, 1vw, 12px);
+    position: relative;
+}
+
+.album-photo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+}
+
+.album-photos.animating {
+    transition: height 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.album-photos.animating .album-photo {
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+                width 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+                height 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.photo-frame {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* Opening an album: the collage fades in */
+.album-photos.revealing .album-photo {
+    animation: photo-fade-in 0.5s ease both;
+}
+
+@keyframes photo-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.album-photo img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    border-radius: var(--photo-radius);
+}
+
+/* Corner +/- button, shown on hover (always on touch screens and when expanded) */
+.photo-expand {
+    --size: 30px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: var(--size);
+    height: var(--size);
+    padding: 0;
+    border: 0;
+    border-radius: var(--photo-radius);  /* same rounding as the photos */
+    background: #fff;
+    color: #111;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s ease, background 0.2s ease;
+}
+
+.photo-expand::before,
+.photo-expand::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 12px;
+    height: 1.5px;
+    background: currentColor;
+    transform: translate(-50%, -50%);
+}
+
+.photo-expand::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.album-photo.expanded .photo-expand::after {
+    display: none;
+}
+
+.photo-frame:hover .photo-expand,
+.photo-expand:focus-visible,
+.album-photo.expanded .photo-expand {
+    opacity: 1;
+}
+
+@media (hover: none) {
+    .photo-expand {
+        opacity: 1;
+    }
+}
+
+.album-video {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    border-radius: clamp(10px, 1.2vw, 14px);
+    overflow: hidden;
+}
+
+.album-video iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+
+/* Second section heading on a list page (e.g. Videos under Photos) */
+.home-copy .section-heading {
+    margin-top: 3.5rem;
+    margin-bottom: 0.35rem;
+}
+
+/* Writing list: a story opens in place under its title */
+.home-copy .album-story p {
+    font-size: clamp(1rem, 1.4vw, 1.25rem);
+    line-height: 1.65;
+    margin: 0 0 1em;
+}
+
+.album-story {
+    padding-top: 0.4rem;
+    padding-bottom: 1.5rem;
+    animation: photo-fade-in 0.4s ease both;
+}
+
+/* Story page: a single reading column under the site's header */
+.story {
+    max-width: 640px;
+}
+
+.story-title {
+    font-size: clamp(1.6rem, 3vw, 2.6rem);
+    font-weight: 400;
+    line-height: 1.2;
+    margin: 0;
+}
+
+.story-date {
+    font-size: clamp(0.95rem, 1.3vw, 1.2rem);
+    color: #888;
+    margin: 0.5rem 0 0;
+}
+
+.story-body {
+    margin-top: 2.5rem;
+    padding-bottom: 4rem;
+}
+
+/* Book-style paragraphs: every paragraph indented, no gap between them */
+.story-body p {
+    font-size: clamp(1.05rem, 1.4vw, 1.3rem);
+    line-height: 1.7;
+    margin: 0;
+    text-indent: 1.5em;
+    text-align: justify;
+    hyphens: auto;  /* breaks long words so justified lines don't open wide gaps */
+}
+
+body.dark-theme .story-date {
+    color: #999;
+}
+
+/* Essay pages (generated by websitewriting/build_posts.py) */
+.story-context {
+    font-size: clamp(0.95rem, 1.3vw, 1.2rem);
+    font-style: italic;
+    color: #888;
+    margin: 0.25rem 0 0;
+}
+
+.story-body blockquote {
+    margin: 1.2rem 0 1.2rem 1.5em;
+    padding-left: 1em;
+    border-left: 1px solid #ccc;
+}
+
+.story-body blockquote p {
+    text-align: left;
+}
+
+.story-body blockquote p + p {
+    margin-top: 0.6rem;
+}
+
+.story-body h2 {
+    font-size: clamp(1.2rem, 1.8vw, 1.6rem);
+    font-weight: 400;
+    margin: 2.5rem 0 0;
+}
+
+.story-body h2:first-child {
+    margin-top: 0;
+}
+
+.story-body .section-date {
+    color: #888;
+    text-indent: 0;
+    margin-bottom: 0.8rem;
+}
+
+body.dark-theme .story-context,
+body.dark-theme .story-body .section-date {
+    color: #999;
+}
+
+body.dark-theme .story-body blockquote {
+    border-left-color: #555;
 }

@@ -9,34 +9,97 @@
 
     <script data-goatcounter="https://mayamm.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </head>
-<body>
+<body class="home-page light-theme">
+    <script src="theme.js"></script>
+    <main class="home-shell">
+        <div class="home-copy">
+            <p>My name is <a href="about/">Maya Markus-Malone.</a></p>
 
-    <main class="portfolio-grid">
-        <div class="side-column">
-            <a href="projects/" class="grid-item">
-                <img src="./images/projectsb.jpg" alt="Projects">
-            </a>
-            <a href="about/" class="grid-item">
-                <img src="./images/abboutb.jpg" alt="About Me">
-            </a>
-        </div>
-
-        <div class="bio-column">
-            <p>My name is Maya Markus-Malone.</p>
             <p>I am a growth engineer at Secureframe, where I build AI agents, internal applications, and scalable marketing content.</p>
-            <p>I studied computer science and creative writing at Duke University.</p>
-            <p>I designed and coded this site. Explore it to learn more about me!</p>
-        </div>
 
-        <div class="side-column">
-            <a href="resume/index.html" class="grid-item">
-                <img src="./images/resumeb.jpg" alt="Resume">
-            </a>
-            <a href="writing/" class="grid-item">
-                <img src="./images/writingb.jpg" alt="Writing">
-            </a>
+            <p>You can find me on <a href="https://www.linkedin.com/in/maya-markus-malone/" target="_blank" rel="noreferrer">LinkedIn</a>, <a href="https://x.com/mayareadsnews" target="_blank" rel="noreferrer">X</a>, and <a href="https://github.com/mmarkusmalone" target="_blank" rel="noreferrer">GitHub</a>.</p>
+
+            <p>See more of what I’m <a href="projects/">building</a>, <a href="writing/">writing</a>, and <a href="photography/">taking photos of</a>.</p>
+
+            <div id="spotify-widget" class="spotify-widget">
+                <div class="spotify-loading">Loading...</div>
+            </div>
+
+            <div class="reading" id="reading">
+                <p class="reading-label">Recently read:</p>
+                <!-- Goodreads grid widget fills this hidden div; loadReading() rebuilds it as larger covers -->
+                <div id="gr_grid_widget_1794635702" hidden></div>
+                <div class="reading-grid" id="readingGrid"></div>
+            </div>
         </div>
     </main>
+
+    <script>
+        async function fetchSpotify() {
+            try {
+                const res = await fetch('https://spotify-widget-chi.vercel.app/api/spotify');
+                const data = await res.json();
+                const widget = document.getElementById('spotify-widget');
+
+                if (data.title) {
+                    const label = data.isPlaying ? 'Now playing:' : 'Recently played:';
+                    widget.innerHTML = `
+                        <p class="spotify-label">${label}</p>
+                        <a href="${data.songUrl}" target="_blank" class="spotify-link">
+                            <img src="${data.albumArt}" alt="Album art" class="spotify-album">
+                            <div class="spotify-info">
+                                <span class="spotify-title">${data.title}</span>
+                                <span class="spotify-artist">${data.artist}</span>
+                            </div>
+                        </a>
+                    `;
+                } else {
+                    widget.innerHTML = '';
+                }
+            } catch (e) {
+                document.getElementById('spotify-widget').innerHTML = '';
+            }
+        }
+        fetchSpotify();
+        setInterval(fetchSpotify, 30000);
+
+        // Load the Goodreads grid widget, then re-render its books as a cover grid
+        function loadReading() {
+            const section = document.getElementById('reading');
+            const source = document.getElementById('gr_grid_widget_1794635702');
+            const grid = document.getElementById('readingGrid');
+
+            const widget = document.createElement('script');
+            widget.src = "https://www.goodreads.com/review/grid_widget/161191839.Maya's%20bookshelf:%20read?cover_size=medium&hide_link=true&hide_title=true&num_books=4&order=d&shelf=read&sort=date_read&widget_id=1794635702";
+            widget.onload = () => {
+                source.querySelectorAll('.gr_grid_book_container a').forEach((a) => {
+                    const img = a.querySelector('img');
+                    if (!img) return;
+
+                    const book = document.createElement('a');
+                    book.href = a.href;
+                    book.title = a.title;
+                    book.className = 'reading-book';
+                    book.target = '_blank';
+                    book.rel = 'noopener';
+
+                    const cover = document.createElement('img');
+                    // Swap Goodreads' thumbnail size suffix (e.g. ._SX98_.) for a sharper one
+                    cover.src = img.src.replace(/\._S[XY]\d+_\./, '._SX318_.');
+                    cover.alt = img.alt;
+                    cover.loading = 'lazy';
+
+                    book.appendChild(cover);
+                    grid.appendChild(book);
+                });
+                source.remove();
+                if (!grid.children.length) section.hidden = true;
+            };
+            widget.onerror = () => { section.hidden = true; };
+            document.body.appendChild(widget);
+        }
+        loadReading();
+    </script>
 
 </body>
 </html>
