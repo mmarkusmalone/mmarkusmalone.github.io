@@ -1912,13 +1912,17 @@ body.dark-theme .home-footer a.spotify-link {
     }
 }
 
-/* Caption that follows the cursor over homepage intro links (positioned by index.html script) */
+/* Caption pinned under hovered homepage intro links, left-aligned (positioned by index.html script) */
 .link-hint {
     position: fixed;
     top: 0;
     left: 0;
     /* Hint only shows while a link is hovered, so use the link hover color (see a:hover) */
     color: #005b8d;
+    /* Page-colored backing so it reads cleanly when it sits over the next line */
+    background: #ffffff;
+    padding: 1px 4px;
+    margin-left: -4px;
     font-size: 0.8rem;
     font-weight: 300;
     line-height: 1.3;
@@ -1928,6 +1932,10 @@ body.dark-theme .home-footer a.spotify-link {
     opacity: 0;
     transition: opacity 0.15s ease;
     z-index: 50;
+}
+
+body.dark-theme .link-hint {
+    background: #0f1115;
 }
 
 .link-hint.is-visible {

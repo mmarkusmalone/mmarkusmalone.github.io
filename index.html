@@ -19,7 +19,7 @@
 
             <p>I am a growth engineer at Secureframe, where I build AI agents, internal applications, and scalable marketing content.</p>
 
-            <p>See more of what I’m <a href="projects/" data-caption="AI tools, apps and experiments">building</a>, <a href="writing/" data-caption="Short stories and essays">writing</a>, and <a href="photography/" data-caption="Some of my favorite photos and videos">taking photos of</a>.</p>
+            <p>See more of what I’m <a href="projects/" data-caption="AI tools, apps and experiments">building</a>, <a href="writing/" data-caption="Short stories and essays">writing</a>, and <a href="photography/" data-caption="My favorite photos and videos">taking photos of</a>.</p>
         </div>
 
         <footer class="home-footer">
@@ -104,32 +104,34 @@
         }
         loadReading();
 
-        // Hover captions on the intro links: a small hint that follows the cursor
+        // Hover captions on the intro links: a small note pinned just under the link, left-aligned
         if (window.matchMedia('(hover: hover)').matches) {
             const hint = document.createElement('div');
             hint.className = 'link-hint';
             hint.setAttribute('aria-hidden', 'true');
             document.body.appendChild(hint);
 
-            const moveHint = (x, y) => {
+            const placeHint = (link) => {
+                // First line box of the link (a link can wrap onto two lines)
+                const r = link.getClientRects()[0];
                 const pad = 8;
-                let left = x + 14;
-                let top = y + 16;
-                const w = hint.offsetWidth, h = hint.offsetHeight;
-                if (left + w > window.innerWidth - pad) left = x - w - 10;
-                if (top + h > window.innerHeight - pad) top = y - h - 10;
-                hint.style.transform = `translate(${left}px, ${top}px)`;
+                let left = r.left;
+                const top = r.bottom + 2;
+                const w = hint.offsetWidth;
+                if (left + w > window.innerWidth - pad) left = window.innerWidth - pad - w;
+                hint.style.transform = `translate(${Math.round(left)}px, ${Math.round(top)}px)`;
             };
 
             document.querySelectorAll('.home-copy a[data-caption]').forEach((link) => {
-                link.addEventListener('mouseenter', (e) => {
+                link.addEventListener('mouseenter', () => {
                     hint.textContent = link.dataset.caption;
-                    moveHint(e.clientX, e.clientY);
+                    placeHint(link);
                     hint.classList.add('is-visible');
                 });
-                link.addEventListener('mousemove', (e) => moveHint(e.clientX, e.clientY));
                 link.addEventListener('mouseleave', () => hint.classList.remove('is-visible'));
             });
+
+            window.addEventListener('scroll', () => hint.classList.remove('is-visible'), { passive: true });
         }
     </script>
 
