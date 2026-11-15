@@ -9,6 +9,9 @@ html, body {
     font-family: "neue-haas-grotesk-display", sans-serif;
     letter-spacing: 0.02em;
     font-style: normal;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 body {
@@ -55,7 +58,7 @@ body.home-page {
     font-size: clamp(1.2rem, 2vw, 2rem);
     line-height: 1.5;
     margin: 0;
-    font-weight: 400;
+    font-weight: 300;
 }
 
 .home-copy p:first-child {
@@ -548,7 +551,7 @@ body.dark-theme .resume-header p {
 .accordion-trigger {
     cursor: pointer;
     font-size: inherit;
-    font-weight: 400;
+    font-weight: 300;
     padding: 0;
     margin: 0;
     text-align: left;
@@ -605,14 +608,14 @@ body.dark-theme .resume-header p {
 
 .about-intro h1 {
     font-size: clamp(1.2rem, 2vw, 2rem);
-    font-weight: 400;
+    font-weight: 300;
     line-height: 1.5;
     margin: 0 0 16px 0;
 }
 
 .about-intro p {
     font-size: clamp(1.2rem, 2vw, 2rem);
-    font-weight: 400;
+    font-weight: 300;
     line-height: 1.5;
     margin: 0 0 0.45rem 0;
 }
@@ -1261,7 +1264,7 @@ header.top-nav p {
     margin: 0;
     font-size: clamp(1.2rem, 2vw, 2rem);
     line-height: 1.5;
-    font-weight: 400;
+    font-weight: 300;
 }
 
 @media (max-width: 660px) {
@@ -1307,7 +1310,7 @@ header.top-banner p {
     font-size: clamp(1.2rem, 2vw, 2rem) !important;
     line-height: 1.5;
     letter-spacing: 0.02em;
-    font-weight: 400;
+    font-weight: 300;
 }
 
 @media (max-width: 660px) {
@@ -1468,28 +1471,22 @@ body:has(.writing-header) {
     margin-right: 0.5em;
 }
 
-/* Diagonal shaft, corner to corner */
+/* Arrow drawn as one SVG shape (shaft meets the arrowhead cleanly); takes the text color */
 .link-icon::before {
     content: "";
     position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 141%;
-    height: 1.5px;
+    inset: 0;
     background: currentColor;
-    transform: translate(-50%, -50%) rotate(-45deg);
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='black' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2.5 13.5 13.5 2.5M5 2.5h8.5V11'/%3E%3C/svg%3E") center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='black' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2.5 13.5 13.5 2.5M5 2.5h8.5V11'/%3E%3C/svg%3E") center / contain no-repeat;
 }
 
-/* Arrowhead in the top-right corner */
-.link-icon::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 60%;
-    height: 60%;
-    border-top: 1.5px solid currentColor;
-    border-right: 1.5px solid currentColor;
+/* Small arrow after an inline link in a sentence (homepage LinkedIn / X / GitHub) */
+.link-icon.is-inline {
+    --icon-size: 0.32em;
+    vertical-align: 0.42em;
+    margin-right: 0;
+    margin-left: 0.15em;
 }
 
 /* Writing: rows open the story on its own page, marked with a thin dash */
@@ -1673,7 +1670,7 @@ body.dark-theme a.link-row:visited {
 
 .story-title {
     font-size: clamp(1.6rem, 3vw, 2.6rem);
-    font-weight: 400;
+    font-weight: 300;
     line-height: 1.2;
     margin: 0;
 }
@@ -1727,7 +1724,7 @@ body.dark-theme .story-date {
 
 .story-body h2 {
     font-size: clamp(1.2rem, 1.8vw, 1.6rem);
-    font-weight: 400;
+    font-weight: 300;
     margin: 2.5rem 0 0;
 }
 
@@ -1748,4 +1745,211 @@ body.dark-theme .story-body .section-date {
 
 body.dark-theme .story-body blockquote {
     border-left-color: #555;
+}
+
+/* Homepage footer: small "Recently played" and "Recently read" side by side at the bottom */
+.home-main {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 76px);
+}
+
+.home-footer {
+    margin-top: auto;
+    padding-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+}
+
+/* Widgets side by side; each has its two-line label to the left */
+.footer-widgets {
+    display: flex;
+    align-items: center;
+    gap: 3.5rem;
+    min-width: 0;
+    max-width: 100%;
+}
+
+.footer-widgets .spotify-widget,
+.footer-widgets .reading {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-width: 0;
+}
+
+.footer-widgets .spotify-widget {
+    flex: 0 1 auto;
+}
+
+.footer-widgets .reading {
+    flex: 0 0 auto;
+}
+
+.home-footer .spotify-link {
+    min-width: 0;
+}
+
+.footer-widgets .reading[hidden] {
+    display: none;
+}
+
+.home-footer .spotify-widget {
+    min-width: 0;
+    flex: 0 1 auto;
+}
+
+.home-footer .reading {
+    flex: 0 0 auto;
+}
+
+.home-footer .spotify-widget,
+.home-footer .reading {
+    margin-top: 0;
+}
+
+/* Small labels, right-aligned beside their widgets */
+.home-footer .spotify-label,
+.home-footer .reading-label {
+    flex: 0 0 auto;
+    font-size: 0.85rem;
+    font-weight: 300;
+    line-height: 1.4;
+    margin: 0;
+    text-align: right;
+}
+
+.home-footer .spotify-link,
+body.dark-theme .home-footer .spotify-link {
+    gap: 10px;
+    padding: 0;
+    background: transparent;
+    max-width: 260px;
+}
+
+.home-footer .spotify-link:hover,
+body.dark-theme .home-footer .spotify-link:hover {
+    background: transparent;
+    opacity: 0.75;
+}
+
+.home-footer .spotify-album {
+    width: 54px;
+    height: 54px;
+}
+
+.home-footer .spotify-album {
+    flex: 0 0 auto;
+}
+
+.home-footer .spotify-info {
+    gap: 2px;
+    min-width: 0;
+}
+
+.home-footer .spotify-title,
+.home-footer .spotify-artist {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.home-footer .spotify-title {
+    font-size: 0.85rem;
+    color: inherit;
+}
+
+body.light-theme .home-footer a.spotify-link,
+body.dark-theme .home-footer a.spotify-link {
+    color: inherit;
+}
+
+.home-footer .spotify-artist,
+.home-footer .spotify-loading {
+    font-size: 0.8rem;
+}
+
+.home-footer .reading-grid {
+    grid-template-columns: repeat(4, 36px);
+    gap: 6px;
+    max-width: none;
+}
+
+.home-footer .reading-book:hover img {
+    transform: translateY(-2px);
+}
+
+@media (max-width: 640px) {
+    .footer-widgets {
+        gap: 1.1rem;
+    }
+
+    .footer-widgets .spotify-widget,
+    .footer-widgets .reading {
+        gap: 0.45rem;
+    }
+
+    .home-footer .spotify-label,
+    .home-footer .reading-label {
+        font-size: 0.75rem;
+    }
+
+    .home-footer .spotify-album {
+        width: 45px;
+        height: 45px;
+    }
+
+    /* Three smaller covers on phones so both widgets fit on one line */
+    .home-footer .reading-grid {
+        grid-template-columns: repeat(3, 28px);
+        gap: 4px;
+    }
+
+    .home-footer .reading-book:nth-child(n+4) {
+        display: none;
+    }
+}
+
+/* Caption that follows the cursor over homepage intro links (positioned by index.html script) */
+.link-hint {
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* Hint only shows while a link is hovered, so use the link hover color (see a:hover) */
+    color: #005b8d;
+    font-size: 0.8rem;
+    font-weight: 300;
+    line-height: 1.3;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+    z-index: 50;
+}
+
+.link-hint.is-visible {
+    opacity: 1;
+}
+
+/* Homepage links (index.html only, via .home-main) keep the same blue after they've been visited */
+body.light-theme .home-main .home-copy a:visited,
+body.dark-theme .home-main .home-copy a:visited {
+    color: #0077b6;
+}
+
+body.light-theme .home-main .home-copy a:visited:hover,
+body.dark-theme .home-main .home-copy a:visited:hover {
+    color: #005b8d;
+}
+
+/* Homepage intro: name + contact lines as one group, then a bigger break before the rest */
+.home-main .home-copy p:first-child {
+    margin-bottom: 0;
+}
+
+.home-main .home-copy p:nth-child(2) {
+    margin-bottom: 1rem;
 }

@@ -11,27 +11,31 @@
 </head>
 <body class="home-page light-theme">
     <script src="theme.js"></script>
-    <main class="home-shell">
+    <main class="home-shell home-main">
         <div class="home-copy">
-            <p>My name is <a href="about/">Maya Markus-Malone.</a></p>
+            <p>My name is <a href="about/" data-caption="About me">Maya Markus-Malone.</a></p>
+
+            <p>You can find me on <a href="https://www.linkedin.com/in/maya-markus-malone/" target="_blank" rel="noreferrer">LinkedIn<span class="link-icon is-inline" aria-hidden="true"></span></a>, <a href="https://x.com/mayareadsnews" target="_blank" rel="noreferrer">X<span class="link-icon is-inline" aria-hidden="true"></span></a>, and <a href="https://github.com/mmarkusmalone" target="_blank" rel="noreferrer">GitHub<span class="link-icon is-inline" aria-hidden="true"></span></a>.</p>
 
             <p>I am a growth engineer at Secureframe, where I build AI agents, internal applications, and scalable marketing content.</p>
 
-            <p>You can find me on <a href="https://www.linkedin.com/in/maya-markus-malone/" target="_blank" rel="noreferrer">LinkedIn</a>, <a href="https://x.com/mayareadsnews" target="_blank" rel="noreferrer">X</a>, and <a href="https://github.com/mmarkusmalone" target="_blank" rel="noreferrer">GitHub</a>.</p>
-
-            <p>See more of what I’m <a href="projects/">building</a>, <a href="writing/">writing</a>, and <a href="photography/">taking photos of</a>.</p>
-
-            <div id="spotify-widget" class="spotify-widget">
-                <div class="spotify-loading">Loading...</div>
-            </div>
-
-            <div class="reading" id="reading">
-                <p class="reading-label">Recently read:</p>
-                <!-- Goodreads grid widget fills this hidden div; loadReading() rebuilds it as larger covers -->
-                <div id="gr_grid_widget_1794635702" hidden></div>
-                <div class="reading-grid" id="readingGrid"></div>
-            </div>
+            <p>See more of what I’m <a href="projects/" data-caption="AI tools, apps and experiments">building</a>, <a href="writing/" data-caption="Short stories and essays">writing</a>, and <a href="photography/" data-caption="Some of my favorite photos and videos">taking photos of</a>.</p>
         </div>
+
+        <footer class="home-footer">
+            <div class="footer-widgets">
+                <div id="spotify-widget" class="spotify-widget">
+                    <div class="spotify-loading">Loading...</div>
+                </div>
+
+                <div class="reading" id="reading">
+                    <p class="reading-label">Recently<br>read</p>
+                    <!-- Goodreads grid widget fills this hidden div; loadReading() rebuilds it as small covers -->
+                    <div id="gr_grid_widget_1794635702" hidden></div>
+                    <div class="reading-grid" id="readingGrid"></div>
+                </div>
+            </div>
+        </footer>
     </main>
 
     <script>
@@ -42,7 +46,7 @@
                 const widget = document.getElementById('spotify-widget');
 
                 if (data.title) {
-                    const label = data.isPlaying ? 'Now playing:' : 'Recently played:';
+                    const label = data.isPlaying ? 'Now<br>playing' : 'Recently<br>played';
                     widget.innerHTML = `
                         <p class="spotify-label">${label}</p>
                         <a href="${data.songUrl}" target="_blank" class="spotify-link">
@@ -99,6 +103,34 @@
             document.body.appendChild(widget);
         }
         loadReading();
+
+        // Hover captions on the intro links: a small hint that follows the cursor
+        if (window.matchMedia('(hover: hover)').matches) {
+            const hint = document.createElement('div');
+            hint.className = 'link-hint';
+            hint.setAttribute('aria-hidden', 'true');
+            document.body.appendChild(hint);
+
+            const moveHint = (x, y) => {
+                const pad = 8;
+                let left = x + 14;
+                let top = y + 16;
+                const w = hint.offsetWidth, h = hint.offsetHeight;
+                if (left + w > window.innerWidth - pad) left = x - w - 10;
+                if (top + h > window.innerHeight - pad) top = y - h - 10;
+                hint.style.transform = `translate(${left}px, ${top}px)`;
+            };
+
+            document.querySelectorAll('.home-copy a[data-caption]').forEach((link) => {
+                link.addEventListener('mouseenter', (e) => {
+                    hint.textContent = link.dataset.caption;
+                    moveHint(e.clientX, e.clientY);
+                    hint.classList.add('is-visible');
+                });
+                link.addEventListener('mousemove', (e) => moveHint(e.clientX, e.clientY));
+                link.addEventListener('mouseleave', () => hint.classList.remove('is-visible'));
+            });
+        }
     </script>
 
 </body>
